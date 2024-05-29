@@ -1,4 +1,10 @@
 # Bunch of Complex Stuff (for AFOM)
+![A box containing the logo of BOCS, get it?](assets/banner.jpg "Banner")
+## The triggers
+![Object variable sprite](assets/obj_variable.png "obj_variable")
+![Object get variable sprite](assets/obj_getvar.png "obj_getvar")
+![Object delay sprite](assets/obj_delay.png "obj_delay")
+![Object compare sprite](assets/obj_compare.png "obj_compare")
 
 *Video explanation coming soon!*
 
