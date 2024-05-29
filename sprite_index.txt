@@ -1,0 +1,18 @@
+- bocs_textures.png
+Embedded Texture - Texture 415
+
+- obj_variable.png
+Texture Page Item - PageItem 32467
+Sprite - variable_trigger
+
+- obj_compare.png
+Texture Page Item - PageItem 32468
+Sprite - compare_trigger
+
+- obj_delay.png
+Texture Page Item - PageItem 32469
+Sprite - delay_trigger
+
+- obj_getvar.png
+Texture Page Item - PageItem 32470
+Sprite - getvar_trigger
