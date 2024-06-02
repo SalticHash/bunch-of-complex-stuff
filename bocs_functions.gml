@@ -41,7 +41,10 @@ function evaluate(argument0) {
     return result
 }
 
-// Gets a global's value or returns inputed value
+// Parses a value, and if a global called that exists it returns its value
+// Returns the value itself
+// Returns a solved operation
+// Returns a global variable's value
 function parse_global(argument0)
 {
     var _global = argument0;
@@ -54,32 +57,55 @@ function parse_global(argument0)
     return variable_global_get(_global);
 }
 
+// Parses a value, and if a global called that exists it returns its value
+// Returns a local variable's value or -1
+function parse_local(argument0, argument1)
+{
+    var inst_id = argument0;
+    var local = argument1;
+    if (typeof(local) != "string")
+        return 0;
+    if (!variable_instance_exists(inst_id, local))
+        return 0;
+    return variable_instance_get(inst_id, local);
+}
+
 // Sets an instance's local variable to a global variable
+// In the syntax g_example = local
+// In the syntax g_example = op=,+1,+2,
+// In the syntax g_example = spr_example
 function set_local_to_global(argument0, argument1, argument2)
 {
     var inst_id = argument0;
     var local = argument1;
     var _global = argument2;
-    if ((typeof(_global) != "string") || (typeof(local) != "string"))
+
+    if (typeof(_global) != "string")
         return;
-    if (!variable_instance_exists(inst_id, local))
+    if (!variable_global_exists(_global))
         return;
-    variable_global_set(_global, variable_instance_get(inst_id, local));
+    
+    var local_value = global.parse_local(inst_id, local);
+    variable_global_set(_global, local_value);
 }
 
 // Sets a global variable to an instance's local variable
+// In the syntax v_example = global
+// In the syntax v_example = op=,+1,+2,
+// In the syntax v_example = spr_example
 function set_global_to_local(argument0, argument1, argument2)
 {
     var inst_id = argument0;
     var _global = argument1;
     var local = argument2;
-    if ((typeof(local) != "string") || (typeof(_global) != "string"))
+
+    if ((typeof(local) != "string"))
         return;
     if (!variable_instance_exists(inst_id, local))
         return;
     
-    var result = global.parse_global(_global)
-    variable_instance_set(inst_id, local, result);
+    var global_value = global.parse_global(_global)
+    variable_instance_set(inst_id, local, global_value);
 }
 
 // Says if it is a variable param
