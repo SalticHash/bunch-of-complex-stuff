@@ -4,7 +4,9 @@ name = "panic";
 value = 1;
 
 execute = function() {
-    variable_global_set(name, value);
+    var ivalue = parse_global(value);
+    
+    variable_global_set(name, ivalue);
 
     with (obj_trigger)
     {
