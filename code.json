@@ -5,8 +5,6 @@
   "objects": [
     {
       "name": "obj_trigger",
-      "parent": "",
-      "spriteName": "",
       "visible": false,
       "persistent": false,
       "solid": false,
@@ -15,6 +13,18 @@
         {"eventType": "collision", "subtypeID": "obj_player", "scriptName": "gml_Object_obj_trigger_Collision_obj_player"},
         {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_trigger_Other_4"},
         {"eventType": "step", "subtypeID": "step", "scriptName": "gml_Object_obj_trigger_Step_0"}
+      ]
+    },
+    {
+      "name": "obj_variable",
+      "parent": "obj_trigger",
+      "spriteName": "spr_variable_trigger",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_variable_Create_0"},
+        {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_variable_Other_4"}
       ]
     },
     {
@@ -65,22 +75,20 @@
       ]
     },
     {
-      "name": "obj_variable",
-      "parent": "obj_trigger",
-      "spriteName": "spr_variable_trigger",
+      "name": "obj_levelLoader",
+      "spriteName": "spr_beer",
       "visible": false,
       "persistent": false,
       "solid": false,
       "events": [
-        {"eventType": "create", "scriptName": "gml_Object_obj_variable_Create_0"},
-        {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_variable_Other_4"}
+        {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_levelLoader_Other_4"}
       ]
     }
   ],
   "scripts": [
     {"name": "gml_GlobalScript_bocs_functions", "path": "./bocs_functions.gml", "global": true},
 
-    {"name": "gml_Object_obj_trigger_Create_0", "path": "./obj_trigger/self/obj_player_collision.gml"},
+    {"name": "gml_Object_obj_trigger_Create_0", "path": "./obj_trigger/self/create.gml"},
     {"name": "gml_Object_obj_trigger_Collision_obj_player", "path": "./obj_trigger/self/obj_player_collision.gml"},
     {"name": "gml_Object_obj_trigger_Other_4", "path": "./obj_trigger/self/room_start.gml"},
     {"name": "gml_Object_obj_trigger_Step_0", "path": "./obj_trigger/self/step.gml"},
@@ -97,7 +105,13 @@
     {"name": "gml_Object_obj_setvar_Create_0", "path": "./obj_trigger/obj_setvar/create.gml"},
 
     {"name": "gml_Object_obj_variable_Create_0", "path": "./obj_trigger/obj_variable/create.gml"},
-    {"name": "gml_Object_obj_variable_Other_4", "path": "./obj_trigger/obj_variable/room_start.gml"}
+    {"name": "gml_Object_obj_variable_Other_4", "path": "./obj_trigger/obj_variable/room_start.gml"},
+
+    {"name": "gml_Object_obj_levelLoader_Create_0", "path": "./obj_levelLoader/create.gml"},
+    {"name": "gml_Object_obj_levelLoader_Step_0", "path": "./obj_levelLoader/step.gml", "append": true},
+    {"name": "gml_Object_obj_levelLoader_Other_4", "path": "./obj_levelLoader/room_start.gml"},
+
+    {"name": "gml_Object_obj_debugcontroller_Other_4", "path": "./obj_debugcontroller/room_start.gml"}
   ],
   "sprites": [
     {
