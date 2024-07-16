@@ -1,0 +1,190 @@
+{
+  "dataPath": "C:/Program Files (x86)/Steam/steamapps/common/Pizza Tower/unmodified.win",
+  "outputDataPath": "C:/Program Files (x86)/Steam/steamapps/common/Pizza Tower/data.win",
+  "workingDir": "C:/Users/Admin/Documents/GitHub/bunch-of-complex-stuff",
+  "objects": [
+    {
+      "name": "obj_trigger",
+      "parent": "",
+      "spriteName": "",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_trigger_Create_0"},
+        {"eventType": "collision", "subtypeID": "obj_player", "scriptName": "gml_Object_obj_trigger_Collision_obj_player"},
+        {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_trigger_Other_4"},
+        {"eventType": "step", "subtypeID": "step", "scriptName": "gml_Object_obj_trigger_Step_0"}
+      ]
+    },
+    {
+      "name": "obj_compare",
+      "parent": "obj_trigger",
+      "spriteName": "spr_compare_trigger",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_compare_Create_0"},
+        {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_compare_Other_4"}
+      ]
+    },
+    {
+      "name": "obj_delay",
+      "parent": "obj_trigger",
+      "spriteName": "spr_delay_trigger",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_delay_Create_0"},
+        {"eventType": "collision", "subtypeID": "obj_player", "scriptName": "gml_Object_obj_delay_Collision_obj_player"},
+        {"eventType": "alarm", "subtypeID": "0", "scriptName": "gml_Object_obj_delay_Alarm_0"}
+      ]
+    },
+    {
+      "name": "obj_getvar",
+      "parent": "obj_trigger",
+      "spriteName": "spr_getvar_trigger",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_getvar_Create_0"}
+      ]
+    },
+    {
+      "name": "obj_setvar",
+      "parent": "obj_trigger",
+      "spriteName": "spr_setvar_trigger",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_setvar_Create_0"}
+      ]
+    },
+    {
+      "name": "obj_variable",
+      "parent": "obj_trigger",
+      "spriteName": "spr_variable_trigger",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_variable_Create_0"},
+        {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_variable_Other_4"}
+      ]
+    }
+  ],
+  "scripts": [
+    {"name": "gml_GlobalScript_bocs_functions", "path": "./bocs_functions.gml", "global": true},
+
+    {"name": "gml_Object_obj_trigger_Create_0", "path": "./obj_trigger/self/obj_player_collision.gml"},
+    {"name": "gml_Object_obj_trigger_Collision_obj_player", "path": "./obj_trigger/self/obj_player_collision.gml"},
+    {"name": "gml_Object_obj_trigger_Other_4", "path": "./obj_trigger/self/room_start.gml"},
+    {"name": "gml_Object_obj_trigger_Step_0", "path": "./obj_trigger/self/step.gml"},
+    
+    {"name": "gml_Object_obj_compare_Create_0", "path": "./obj_trigger/obj_compare/create.gml"},
+    {"name": "gml_Object_obj_compare_Other_4", "path": "./obj_trigger/obj_compare/room_start.gml"},
+
+    {"name": "gml_Object_obj_delay_Create_0", "path": "./obj_trigger/obj_delay/create.gml"},
+    {"name": "gml_Object_obj_delay_Other_4", "path": "./obj_trigger/obj_delay/room_start.gml"},
+    {"name": "gml_Object_obj_delay_Alarm_0", "path": "./obj_trigger/obj_delay/room_start.gml"},
+
+    {"name": "gml_Object_obj_getvar_Create_0", "path": "./obj_trigger/obj_getvar/create.gml"},
+
+    {"name": "gml_Object_obj_setvar_Create_0", "path": "./obj_trigger/obj_setvar/create.gml"},
+
+    {"name": "gml_Object_obj_variable_Create_0", "path": "./obj_trigger/obj_variable/create.gml"},
+    {"name": "gml_Object_obj_variable_Other_4", "path": "./obj_trigger/obj_variable/room_start.gml"}
+  ],
+  "sprites": [
+    {
+      "spriteName": "spr_compare_trigger",
+      "size": [ 32, 32 ],
+      "margin": [ 0, 32, 32, 0 ],
+      "pageItems": [
+        {
+          "textureID": "base_trigger_texture",
+          "sourcePosition": [ 32, 0 ],
+          "sourceSize": [ 32, 32 ],
+
+          "targetPosition": [ 0, 0 ],
+          "targetSize": [ 32, 32 ],
+          "boundingSize": [ 32, 32 ]
+        }
+      ]
+    },
+    {
+      "spriteName": "spr_delay_trigger",
+      "size": [ 32, 32 ],
+      "margin": [ 0, 32, 32, 0 ],
+      "pageItems": [
+        {
+          "textureID": "base_trigger_texture",
+          "sourcePosition": [ 64, 0 ],
+          "sourceSize": [ 32, 32 ],
+
+          "targetPosition": [ 0, 0 ],
+          "targetSize": [ 32, 32 ],
+          "boundingSize": [ 32, 32 ]
+        }
+      ]
+    },
+    {
+      "spriteName": "spr_getvar_trigger",
+      "size": [ 32, 32 ],
+      "margin": [ 0, 32, 32, 0 ],
+      "pageItems": [
+        {
+          "textureID": "base_trigger_texture",
+          "sourcePosition": [ 96, 0 ],
+          "sourceSize": [ 32, 32 ],
+
+          "targetPosition": [ 0, 0 ],
+          "targetSize": [ 32, 32 ],
+          "boundingSize": [ 32, 32 ]
+        }
+      ]
+    },
+    {
+      "spriteName": "spr_setvar_trigger",
+      "size": [ 32, 32 ],
+      "margin": [ 0, 32, 32, 0 ],
+      "pageItems": [
+        {
+          "textureID": "base_trigger_texture",
+          "sourcePosition": [ 0, 32 ],
+          "sourceSize": [ 32, 32 ],
+
+          "targetPosition": [ 0, 0 ],
+          "targetSize": [ 32, 32 ],
+          "boundingSize": [ 32, 32 ]
+        }
+      ]
+    },
+    {
+      "spriteName": "spr_variable_trigger",
+      "size": [ 32, 32 ],
+      "margin": [ 0, 32, 32, 0 ],
+      "pageItems": [
+        {
+          "textureID": "base_trigger_texture",
+          "sourcePosition": [ 0, 0 ],
+          "sourceSize": [ 32, 32 ],
+
+          "targetPosition": [ 0, 0 ],
+          "targetSize": [ 32, 32 ],
+          "boundingSize": [ 32, 32 ]
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "textureID": "base_trigger_texture",
+      "path": "./assets/bocs_textures.png"
+    }
+  ]
+}
