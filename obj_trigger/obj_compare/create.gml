@@ -20,16 +20,8 @@ execute = function() {
         ((i or j) and (op == "or")) or 
         ((i and j) and (op == "and")))
     {
-        with (obj_trigger)
-        {
-            if (other.target_trigger_id == trigger_id)
-                self.trigger()
-        }
+        self.trigger_targets()
     } else {
-        with (obj_trigger)
-        {
-            if (other.else_target_trigger_id == trigger_id)
-                self.trigger()
-        }
+        self.trigger_targets(self.else_target_trigger_id)
     }
 }

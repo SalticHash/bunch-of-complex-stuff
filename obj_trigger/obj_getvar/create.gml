@@ -1,6 +1,6 @@
 event_inherited();
 
-target_obj = obj_player
+target_obj = obj_player1
 target_var = "x"
 target_global_var = "player_x"
 
@@ -10,8 +10,5 @@ execute = function() {
     set_local_to_global(obj, target_var, target_global_var);
 
     // Trigger target trigger
-    with (obj_trigger) {
-        if (other.target_trigger_id == trigger_id)
-            self.trigger()
-    }
+    self.trigger_targets()
 }
