@@ -12,7 +12,8 @@
         {"eventType": "create", "scriptName": "gml_Object_obj_trigger_Create_0"},
         {"eventType": "collision", "subtypeID": "obj_player", "scriptName": "gml_Object_obj_trigger_Collision_obj_player"},
         {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_trigger_Other_4"},
-        {"eventType": "step", "subtypeID": "step", "scriptName": "gml_Object_obj_trigger_Step_0"}
+        {"eventType": "step", "subtypeID": "step", "scriptName": "gml_Object_obj_trigger_Step_0"},
+        {"eventType": "alarm", "subtypeID": "1", "scriptName": "gml_Object_obj_trigger_Alarm_1"}
       ]
     },
     {
@@ -23,8 +24,7 @@
       "persistent": false,
       "solid": false,
       "events": [
-        {"eventType": "create", "scriptName": "gml_Object_obj_variable_Create_0"},
-        {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_variable_Other_4"}
+        {"eventType": "create", "scriptName": "gml_Object_obj_variable_Create_0"}
       ]
     },
     {
@@ -35,8 +35,7 @@
       "persistent": false,
       "solid": false,
       "events": [
-        {"eventType": "create", "scriptName": "gml_Object_obj_compare_Create_0"},
-        {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_compare_Other_4"}
+        {"eventType": "create", "scriptName": "gml_Object_obj_compare_Create_0"}
       ]
     },
     {
@@ -93,9 +92,9 @@
     {"name": "gml_Object_obj_trigger_Other_4", "path": "./obj_trigger/self/room_start.gml"},
     {"name": "gml_Object_obj_trigger_Step_0", "path": "./obj_trigger/self/step.gml"},
     {"name": "gml_Object_obj_trigger_Step_2", "path": "./obj_trigger/self/step_end.gml"},
+    {"name": "gml_Object_obj_trigger_Alarm_1", "path": "./obj_trigger/self/alarm1.gml"},
     
     {"name": "gml_Object_obj_compare_Create_0", "path": "./obj_trigger/obj_compare/create.gml"},
-    {"name": "gml_Object_obj_compare_Other_4", "path": "./obj_trigger/obj_compare/room_start.gml"},
     
     {"name": "gml_Object_obj_delay_Create_0", "path": "./obj_trigger/obj_delay/create.gml"},
     {"name": "gml_Object_obj_delay_Other_4", "path": "./obj_trigger/obj_delay/room_start.gml"},
@@ -106,7 +105,6 @@
     {"name": "gml_Object_obj_setvar_Create_0", "path": "./obj_trigger/obj_setvar/create.gml"},
     
     {"name": "gml_Object_obj_variable_Create_0", "path": "./obj_trigger/obj_variable/create.gml"},
-    {"name": "gml_Object_obj_variable_Other_4", "path": "./obj_trigger/obj_variable/room_start.gml"},
     
     {"name": "gml_Object_obj_levelLoader_Create_0", "path": "./obj_levelLoader/create.gml"},
     {"name": "gml_Object_obj_levelLoader_Step_2", "path": "./obj_levelLoader/end_step.gml", "append": true},
@@ -115,8 +113,10 @@
     {"name": "gml_Object_obj_debugcontroller_Other_4", "path": "./obj_debugcontroller/room_start.gml"},
     
     {"name": "gml_Object_obj_rmEditor_Create_0", "path": "./obj_rmEditor/create.gml"},
-    {"name": "gml_Object_obj_rmEditor_Draw_64", "path": "./obj_rmEditor/draw.gml"},
-    {"name": "gml_Object_obj_rmEditor_Step_0", "path": "./obj_rmEditor/step.gml", "append": true}
+    {"name": "gml_Object_obj_rmEditor_Draw_64", "path": "./obj_rmEditor/drawGui.gml"},
+    {"name": "gml_Object_obj_rmEditor_Step_0", "path": "./obj_rmEditor/step.gml"},
+    
+    {"name": "gml_Script_windows", "path": "./windows.gml"}
   ],
   "sprites": [
     {

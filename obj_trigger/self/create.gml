@@ -10,12 +10,16 @@ on_repeat_after = 0;
 multi = 0;
 activated = 0;
 
+image_blend = c_gray
+
 execute = function() {}
 
 trigger = function() {
+
     if (on_trigger && (!activated))
     {
         self.execute()
+
         if (!multi)
             activated = 1
     }

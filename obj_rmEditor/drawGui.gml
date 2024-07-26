@@ -309,13 +309,26 @@ for (var i = 0; i < array_length(w_openCanvas); i++)
                     var instVars = insData.variables
                     var varInfo = instance_getVarList(insData.object, insData, 1)
                     var varNames = varInfo[0]
-                    draw_sprite(_spr("ui_button"), 0, 0, (16 + array_length(varNames) * 12))
+
                     for (j = 0; j < array_length(varNames); j++)
                     {
-                        yy = 16 + j * 12
+                        yy = 16 + j * 16 // New spacing
+
+                        // NEW: alternating bg
+                        if (j % 2 == 1) {
+                            draw_set_color(c_black)
+                            draw_set_alpha(0.25)
+                            draw_rectangle(0, yy, c.width, yy + 15, 0)
+                            draw_set_alpha(1)
+                            draw_set_color(c_white)
+                        }
+                        // NEW: end of NEW
+
                         if (c.hovering == j)
-                            draw_rectangle(0, yy, c.width, (yy + 12), 0)
-                        draw_sprite(_spr("ui_button"), 1, (c.width - 24), (16 + j * 12))
+                            draw_rectangle(0, yy, c.width, (yy + 15), 0)
+                        
+                        draw_sprite(_spr("ui_button"), 1, (c.width - 20), yy + 2) // NEW: Added the +2 for centering
+
                         var value = "-"
                         if variable_struct_exists(instVars, varNames[j])
                             value = struct_get(instVars, varNames[j])
@@ -328,19 +341,28 @@ for (var i = 0; i < array_length(w_openCanvas); i++)
                                     vname = struct_get(varInfo[1][j][2], "display")
                             }
                         }
-                        draw_text(0, yy, (vname + ": " + string(value)))
+
+                        draw_text(2, yy + 2, (vname + ": " + string(value)))
                     }
 
                     // NEW: draw the bg for the name and id
                     draw_set_color(c_black)
                     draw_set_alpha(0.85)
-                    draw_rectangle(0, c.scroll_y, c.width, c.scroll_y + 16, 0)
+                    draw_rectangle(0, c.scroll_y, c.width, c.scroll_y + 15, 0)
+
+                    draw_rectangle(0, c.scroll_y + (c.height - 16), c.width, c.scroll_y + (c.height), 0)
+
+                    
                     draw_set_alpha(1)
                     draw_set_color(c_white)
-                    draw_text(14, c.scroll_y, fstring("{instSelectedName}: {instSelectedId}"))
+                    draw_text(16, c.scroll_y + 2, fstring("{instSelectedName}: {instSelectedId}"))
+
+                    draw_sprite(_spr("ui_button"), 2, 2, c.scroll_y + 2)
+
+                    draw_sprite(_spr("ui_button"), 0, 2, c.scroll_y + (c.height - 14))
+                    draw_text(16, c.scroll_y + (c.height - 14), "Add")
                     // NEW: end of NEW
 
-                    draw_sprite(_spr("ui_button"), 2, 0, c.scroll_y)
 
                     surface_reset_target()
                     var sx = (c.x + 2) * w_scale
@@ -371,7 +393,7 @@ for (var i = 0; i < array_length(w_openCanvas); i++)
         }
 
         surface_reset_target()
-        wCanvas_draw(c, 0.5)
+        wCanvas_draw(c, 0.5, c_black, 0.8, merge_color(c_white, c_black, 0.75))
     }
 }
 var cpos = gml_Script_cursor_hud_position()

@@ -52,8 +52,10 @@ function parse_global(argument0)
         return _global;
     if (string_starts_with(_global, "op=,"))
         return global.evaluate(_global)
-    if (!variable_global_exists(_global))
-        return _global;
+    if (!variable_global_exists(_global)) {
+        variable_global_set(_global, 0)
+        return 0;
+    }
     return variable_global_get(_global);
 }
 
