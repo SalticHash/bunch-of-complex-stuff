@@ -405,8 +405,7 @@ function initInst(argument0) //gml_Script_initInst
     var ins = instance_create_layer(struct_get(struct_get(insData, "variables"), "x"), struct_get(struct_get(insData, "variables"), "y"), layer_get_id(gml_Script_layerFormat("Instances", l)), obj_editorInst)
     
 
-    // NEW: more name id...
-    objectId = insData.object
+    // NEW: more name id...    objectId = insData.object
     if (typeof(objectId) == "string")
     {
         objectId = asset_get_index(objectId)

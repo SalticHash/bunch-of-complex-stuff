@@ -21,11 +21,9 @@ execute = function() {
         ((i and j) and (op == "and")))
     {
         self.trigger_targets()
-        image_blend = c_white
-        alarm[1] = room_speed * 0.25
+        self.set_color(c_white);
     } else {
         self.trigger_targets(self.else_target_trigger_id)
-        image_blend = c_green
-        alarm[1] = room_speed * 0.25
+        self.set_color(c_green);
     }
 }

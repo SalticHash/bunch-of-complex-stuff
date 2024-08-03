@@ -1048,7 +1048,7 @@
 		"|obj_trigger|": [
 			["trigger_id", [-1, 0, 1, 2, 3, 4, 5, 6]],
 			["target_trigger_id", [-1, 0, 1, 2, 3, 4, 5, 6]],
-			["on_enter", ["true", "false"], {"noCustom": true}],
+			["on_start", ["true", "false"], {"noCustom": true}],
 			["on_touch", ["true", "false"], {"noCustom": true}],
 			["on_trigger", ["true", "false"], {"noCustom": true}],
 			["on_repeat", ["true", "false"], {"noCustom": true}],

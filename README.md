@@ -37,7 +37,7 @@ trigger_id = -1;
 target_trigger_id = -1;
 
 // Execute on room start
-on_enter = true;
+on_start = true;
 
 // Execute when player inside
 on_touch = false;

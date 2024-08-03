@@ -7,7 +7,8 @@
  * @description Check if given character is an operator: + - * / ^ ( )
  * @returns {bool}	True if character is one of the 7 operators listed in the description
  */
-function is_operator( _char){
+function is_operator( argument0){
+	var _char = argument0
 	return
 		_char == "+"
 		|| _char == "-"
@@ -18,33 +19,48 @@ function is_operator( _char){
 		|| _char == ")";
 }
 
+function operation( argument0, argument1, argument2) {
+	var _char = argument0
+	var _lh = argument1
+	var _rh = argument2
+	switch (_char) {
+		case "+": return _lh + _rh;
+		case "-": return _lh - _rh;
+		case "*": return _lh * _rh;
+		case "/": return _lh / _rh;
+		case "^": return power(_lh, _rh);
+		default: return 0;
+	}
+}
+
 /**
  * @function postfix_queue_eval( queue)
  * @param {Id.DsQueue}	_queue	Queue representing postfix expression
  * @description Evaluate a postfix expression
  * @returns {real}	Result
  */
-function postfix_queue_eval( _queue){
+function postfix_queue_eval( argument0){
+	var _queue = argument0
 	var stack = ds_stack_create();
-	var operations = ds_map_create();
-	operations[? "+"] = function( _lh, _rh){ return _lh + _rh;};
-	operations[? "-"] = function( _lh, _rh){ return _lh - _rh;};
-	operations[? "*"] = function( _lh, _rh){ return _lh * _rh;};
-	operations[? "/"] = function( _lh, _rh){ return _lh / _rh;};
-	operations[? "^"] = function( _lh, _rh){ return power(_lh, _rh);};
 	
 	while( !ds_queue_empty( _queue)){
 		var t = ds_queue_dequeue( _queue);
 		if( is_operator( t)){
 			var rh = ds_stack_pop( stack);
 			var lh = ds_stack_pop( stack);
-			ds_stack_push( stack, operations[? t](lh, rh));
+
+			var result = operation(t, lh, rh)
+
+			ds_stack_push( stack, result);
 		}else{
             var v;
-            if (variable_global_exists(t))
-                v = variable_global_get(t);
-            else
-                v = real(t)
+			
+			if (variable_global_exists(t)) {
+				v = variable_global_get(t);
+			} else {
+				v = real(t);
+			}
+
 			ds_stack_push( stack, v);
 		}
 	}
@@ -53,7 +69,6 @@ function postfix_queue_eval( _queue){
 	var ret = ds_stack_pop( stack);
 	
 	ds_stack_destroy( stack);
-	ds_map_destroy( operations);
 	
 	return ret;
 }
@@ -65,7 +80,8 @@ function postfix_queue_eval( _queue){
  * @description Parse a complex math expression
  * @returns {real}	Result of expression
  */
-function parse_math( _expression){
+function parse_math( argument0){
+	var _expression = argument0
 	var operators = ds_stack_create(),
 		output = ds_queue_create(),
 		tokens = [];
@@ -74,7 +90,8 @@ function parse_math( _expression){
 	var priorityTable = ds_map_create(),
 		opList = ["+", "-", "*", "/", "^"];
 	for( var i = 0; i < array_length( opList); ++i){
-		priorityTable[? opList[i]] = i;
+		ds_map_add(priorityTable, opList[i], i);
+		
 	}
 	
 	// Remove whitespace
@@ -139,7 +156,7 @@ function parse_math( _expression){
 				continue;
 			}
 			
-			while( priorityTable[? t] < priorityTable[? p]){
+			while( ds_map_find_value(priorityTable, t) < ds_map_find_value(priorityTable, p)){
 				ds_queue_enqueue( output, ds_stack_pop( operators));
 				p = ds_stack_top( operators);
 				if( p == undefined) break;

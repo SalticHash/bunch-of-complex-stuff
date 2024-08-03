@@ -74,18 +74,59 @@
       ]
     },
     {
-      "name": "obj_levelLoader",
-      "spriteName": "spr_beer",
+      "name": "obj_sound",
+      "parent": "obj_trigger",
+      "spriteName": "spr_sound_trigger",
       "visible": false,
       "persistent": false,
       "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_sound_Create_0"}
+      ]
+    },
+    {
+      "name": "obj_collision",
+      "parent": "obj_trigger",
+      "spriteName": "spr_collision_trigger",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_collision_Create_0"}
+      ]
+    },
+    {
+      "name": "obj_createobject",
+      "parent": "obj_trigger",
+      "spriteName": "spr_collision_trigger",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_createobject_Create_0"}
+      ]
+    },
+    {
+      "name": "obj_destroyobject",
+      "parent": "obj_trigger",
+      "spriteName": "spr_collision_trigger",
+      "visible": false,
+      "persistent": false,
+      "solid": false,
+      "events": [
+        {"eventType": "create", "scriptName": "gml_Object_obj_destroyobject_Create_0"}
+      ]
+    },
+    {
+      "name": "obj_levelLoader",
       "events": [
         {"eventType": "other", "subtypeID": "roomStart", "scriptName": "gml_Object_obj_levelLoader_Other_4"}
       ]
     }
   ],
   "scripts": [
-    {"name": "gml_GlobalScript_bocs_functions", "path": "./bocs_functions.gml", "global": true},
+    {"name": "gml_GlobalScript_math", "path": "./global/math.gml", "global": true},
+    {"name": "gml_GlobalScript_BOCS_functions", "path": "./global/bocs_functions.gml", "global": true},
 
     {"name": "gml_Object_obj_trigger_Create_0", "path": "./obj_trigger/self/create.gml"},
     {"name": "gml_Object_obj_trigger_Collision_obj_player", "path": "./obj_trigger/self/obj_player_collision.gml"},
@@ -94,6 +135,8 @@
     {"name": "gml_Object_obj_trigger_Step_2", "path": "./obj_trigger/self/step_end.gml"},
     {"name": "gml_Object_obj_trigger_Alarm_1", "path": "./obj_trigger/self/alarm1.gml"},
     
+    {"name": "gml_Object_obj_variable_Create_0", "path": "./obj_trigger/obj_variable/create.gml"},
+
     {"name": "gml_Object_obj_compare_Create_0", "path": "./obj_trigger/obj_compare/create.gml"},
     
     {"name": "gml_Object_obj_delay_Create_0", "path": "./obj_trigger/obj_delay/create.gml"},
@@ -103,22 +146,43 @@
     {"name": "gml_Object_obj_getvar_Create_0", "path": "./obj_trigger/obj_getvar/create.gml"},
     
     {"name": "gml_Object_obj_setvar_Create_0", "path": "./obj_trigger/obj_setvar/create.gml"},
+
+    {"name": "gml_Object_obj_sound_Create_0", "path": "./obj_trigger/obj_sound/create.gml"},
+
+    {"name": "gml_Object_obj_collision_Create_0", "path": "./obj_trigger/obj_collision/create.gml"},
+
+    {"name": "gml_Object_obj_createobject_Create_0", "path": "./obj_trigger/obj_createobject/create.gml"},
     
-    {"name": "gml_Object_obj_variable_Create_0", "path": "./obj_trigger/obj_variable/create.gml"},
+    {"name": "gml_Object_obj_destroyobject_Create_0", "path": "./obj_trigger/obj_destroyobject/create.gml"},
     
-    {"name": "gml_Object_obj_levelLoader_Create_0", "path": "./obj_levelLoader/create.gml"},
+    {"name": "gml_Object_obj_levelLoader_Create_0", "path": "./obj_levelLoader/createNew.gml"},
     {"name": "gml_Object_obj_levelLoader_Step_2", "path": "./obj_levelLoader/end_step.gml", "append": true},
     {"name": "gml_Object_obj_levelLoader_Other_4", "path": "./obj_levelLoader/room_start.gml"},
     
     {"name": "gml_Object_obj_debugcontroller_Other_4", "path": "./obj_debugcontroller/room_start.gml"},
     
-    {"name": "gml_Object_obj_rmEditor_Create_0", "path": "./obj_rmEditor/create.gml"},
-    {"name": "gml_Object_obj_rmEditor_Draw_64", "path": "./obj_rmEditor/drawGui.gml"},
-    {"name": "gml_Object_obj_rmEditor_Step_0", "path": "./obj_rmEditor/step.gml"},
+    {"name": "gml_Object_obj_rmEditor_Create_0", "path": "./obj_rmEditor/createNew.gml"},
+    {"name": "gml_Object_obj_rmEditor_Draw_64", "path": "./obj_rmEditor/drawGuiNew.gml"},
+    {"name": "gml_Object_obj_rmEditor_Step_0", "path": "./obj_rmEditor/stepNew.gml"}
     
-    {"name": "gml_Script_windows", "path": "./windows.gml"}
   ],
   "sprites": [
+    {
+      "spriteName": "spr_variable_trigger",
+      "size": [ 32, 32 ],
+      "margin": [ 0, 32, 32, 0 ],
+      "pageItems": [
+        {
+          "textureID": "base_trigger_texture",
+          "sourcePosition": [ 0, 0 ],
+          "sourceSize": [ 32, 32 ],
+
+          "targetPosition": [ 0, 0 ],
+          "targetSize": [ 32, 32 ],
+          "boundingSize": [ 32, 32 ]
+        }
+      ]
+    },
     {
       "spriteName": "spr_compare_trigger",
       "size": [ 32, 32 ],
@@ -184,13 +248,29 @@
       ]
     },
     {
-      "spriteName": "spr_variable_trigger",
+      "spriteName": "spr_sound_trigger",
       "size": [ 32, 32 ],
       "margin": [ 0, 32, 32, 0 ],
       "pageItems": [
         {
           "textureID": "base_trigger_texture",
-          "sourcePosition": [ 0, 0 ],
+          "sourcePosition": [ 32, 32 ],
+          "sourceSize": [ 32, 32 ],
+
+          "targetPosition": [ 0, 0 ],
+          "targetSize": [ 32, 32 ],
+          "boundingSize": [ 32, 32 ]
+        }
+      ]
+    },
+    {
+      "spriteName": "spr_collision_trigger",
+      "size": [ 32, 32 ],
+      "margin": [ 0, 32, 32, 0 ],
+      "pageItems": [
+        {
+          "textureID": "base_trigger_texture",
+          "sourcePosition": [ 64, 32 ],
           "sourceSize": [ 32, 32 ],
 
           "targetPosition": [ 0, 0 ],

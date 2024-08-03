@@ -47,14 +47,22 @@ function evaluate(argument0) {
 // Returns a global variable's value
 function parse_global(argument0)
 {
+    if (!variable_global_exists("global_define"))
+        global.global_define = true
+    if (!variable_global_exists("string_define"))
+        global.string_define = true
+    
     var _global = argument0;
     if (typeof(_global) != "string")
         return _global;
     if (string_starts_with(_global, "op=,"))
         return global.evaluate(_global)
+    if (string_starts_with(_global, "=")) {
+        var operation = string_delete(_global, 1, 1) //Remove starting =
+        return global.parse_math(operation)
+    }
     if (!variable_global_exists(_global)) {
-        variable_global_set(_global, 0)
-        return 0;
+        return _global
     }
     return variable_global_get(_global);
 }

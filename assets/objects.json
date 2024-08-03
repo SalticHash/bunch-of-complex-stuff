@@ -1048,7 +1048,7 @@
 		"|obj_trigger|": [
 			["trigger_id", [-1, 0, 1, 2, 3, 4, 5, 6]],
 			["target_trigger_id", [-1, 0, 1, 2, 3, 4, 5, 6]],
-			["on_enter", ["true", "false"], {"noCustom": true}],
+			["on_start", ["true", "false"], {"noCustom": true}],
 			["on_touch", ["true", "false"], {"noCustom": true}],
 			["on_trigger", ["true", "false"], {"noCustom": true}],
 			["on_repeat", ["true", "false"], {"noCustom": true}],
@@ -1063,6 +1063,15 @@
 		],
 		"|obj_getvar|": [
 			"target_obj", "target_var", "target_global_var"
+		],
+		"|obj_setvar|": [
+			"target_obj", "target_var", "target_value"
+		],
+		"|obj_sound|": [
+			"audio_name", "volume", ["loop", ["true", "false"], {"noCustom": true}]
+		],
+		"|obj_collision|": [
+			"target_obj", "enter_target_trigger_id", "exit_target_trigger_id"
 		],
 		"|obj_destroyable|obj_destroyable2|obj_destroyable2_big|obj_destroyable3|obj_metalblock|obj_secretblock|obj_secretbigblock|obj_secretdestroyable|obj_onewaybigblock|": [
 			[
