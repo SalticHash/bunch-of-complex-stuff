@@ -24,9 +24,14 @@ execute = function()
             if (other.target_object_id == object_id || is_undefined(other.target_object_id))
                 colliding = place_meeting(x, y, other)
             
-            if (colliding)
+            if (colliding) {
                 instance_destroy()
+                self.trigger_targets();
+                self.set_color();
+            }
         } else {
+            self.trigger_targets();
+            self.set_color();
             instance_destroy()
         }
     }
