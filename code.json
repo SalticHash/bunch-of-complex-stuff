@@ -155,15 +155,15 @@
     
     {"name": "gml_Object_obj_destroyobject_Create_0", "path": "./obj_trigger/obj_destroyobject/create.gml"},
     
-    {"name": "gml_Object_obj_levelLoader_Create_0", "path": "./obj_levelLoader/createNew.gml"},
+    {"name": "gml_Object_obj_levelLoader_Create_0", "path": "./obj_levelLoader/create.gml"},
     {"name": "gml_Object_obj_levelLoader_Step_2", "path": "./obj_levelLoader/end_step.gml", "append": true},
     {"name": "gml_Object_obj_levelLoader_Other_4", "path": "./obj_levelLoader/room_start.gml"},
     
     {"name": "gml_Object_obj_debugcontroller_Other_4", "path": "./obj_debugcontroller/room_start.gml"},
     
-    {"name": "gml_Object_obj_rmEditor_Create_0", "path": "./obj_rmEditor/createNew.gml"},
-    {"name": "gml_Object_obj_rmEditor_Draw_64", "path": "./obj_rmEditor/drawGuiNew.gml"},
-    {"name": "gml_Object_obj_rmEditor_Step_0", "path": "./obj_rmEditor/stepNew.gml"}
+    {"name": "gml_Object_obj_rmEditor_Create_0", "path": "./obj_rmEditor/create.gml"},
+    {"name": "gml_Object_obj_rmEditor_Draw_64", "path": "./obj_rmEditor/drawGui.gml"},
+    {"name": "gml_Object_obj_rmEditor_Step_0", "path": "./obj_rmEditor/step.gml"}
     
   ],
   "sprites": [

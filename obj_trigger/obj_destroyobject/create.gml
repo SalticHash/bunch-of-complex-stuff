@@ -26,12 +26,12 @@ execute = function()
             
             if (colliding) {
                 instance_destroy()
-                self.trigger_targets();
-                self.set_color();
+                other.trigger_targets();
+                other.set_color();
             }
         } else {
-            self.trigger_targets();
-            self.set_color();
+            other.trigger_targets();
+            other.set_color();
             instance_destroy()
         }
     }

@@ -38,14 +38,12 @@ execute = function() {
         inside = colliding
         if (inside) {
             self.trigger_targets(self.enter_target_trigger_id)
-            self.set_color(c_green, 0.5);
         } else {
             self.trigger_targets(self.exit_target_trigger_id)
-            self.set_color(c_red, 0.5);
         }
     }
     if (inside) {
         self.trigger_targets();
-        self.set_color(c_white);
+        self.set_color();
     }
 }
