@@ -874,10 +874,16 @@
 			"obj_camera_scrollstop"
 		],
 		"BOCS": [
+			"obj_text",
 			"obj_variable",
-			"obj_delay",
 			"obj_compare",
-			"obj_getvar"
+			"obj_delay",
+			"obj_getvar",
+			"obj_setvar",
+			"obj_sound",
+			"obj_collision",
+			"obj_createobject",
+			"obj_destroyobject"
 		]
 	},
 	"order": [
@@ -1071,7 +1077,13 @@
 			"audio_name", "volume", ["loop", ["true", "false"], {"noCustom": true}]
 		],
 		"|obj_collision|": [
-			"target_obj", "enter_target_trigger_id", "exit_target_trigger_id"
+			"target_obj", "target_object_id", "enter_target_trigger_id", "exit_target_trigger_id"
+		],
+		"|obj_createobject|": [
+			"content"
+		],
+		"|obj_destroyobject|": [
+			"target_obj", "target_object_id", ["on_collide", ["true", "false"], {"noCustom": true}]
 		],
 		"|obj_destroyable|obj_destroyable2|obj_destroyable2_big|obj_destroyable3|obj_metalblock|obj_secretblock|obj_secretbigblock|obj_secretdestroyable|obj_onewaybigblock|": [
 			[
@@ -3244,6 +3256,7 @@
 		"targetRoom": "room"
 	},
 	"questionBlocks": {
+		"obj_createobject": "content",
 		"obj_pizzaboxunopen": "content",
 		"obj_baddiespawner": "content",
 		"obj_baddiecameraspawner": "content",
