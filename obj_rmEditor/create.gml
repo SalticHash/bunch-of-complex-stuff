@@ -84,7 +84,6 @@ function saveData() //gml_Script_saveData
         if (typeof(objectId) != "string") {
             objectId = object_get_name(objectId)
             inst.object = objectId
-            show_message("Saving object" + objectId)
         }
     }
     // NEW: end of NEW
@@ -302,9 +301,9 @@ function saveData2() //gml_Script_saveData2
     variable_struct_set(data2, "properties", st_properties)
 
     // NEW: save ids as string
-    for (var i = 0; i < array_length(data.instances); i++)
+    for (var i = 0; i < array_length(data2.instances); i++)
     {
-        inst = data.instances[i]
+        inst = data2.instances[i]
         var objectId = inst.object
         if (typeof(objectId) != "string") {
             objectId = object_get_name(objectId)
@@ -316,8 +315,8 @@ function saveData2() //gml_Script_saveData2
     var jText = json_stringify(data2, 1)
     
     // NEW: reset object id as number
-    for (var i = 0; i < array_length(data.instances); i++) {
-        inst = data.instances[i]
+    for (var i = 0; i < array_length(data2.instances); i++) {
+        inst = data2.instances[i]
         var objectId = inst.object
         if (typeof(objectId) == "string")
         {
