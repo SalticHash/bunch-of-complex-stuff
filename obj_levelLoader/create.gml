@@ -28,7 +28,7 @@ for (var i = 0; i < array_length(data.instances); i++)
         // NEW: End of NEW. 
 
         
-        var ins = instance_create_layer((_stGet("insData.variables.x") - _stGet("data.properties.roomX")), (_stGet("insData.variables.y") - _stGet("data.properties.roomY")), layer_get_id(gml_Script_layerFormat("Instances", l)), _stGet("insData.object"))
+        var ins = instance_create_layer((_stGet("insData.variables.x") - _stGet("data.properties.roomX")), (_stGet("insData.variables.y") - _stGet("data.properties.roomY")), layer_get_id(gml_Script_layerFormat("Instances", l)), jsonObjectId)
         gml_Script_instanceManager_checkAndSwitch(i, ins)
         ins.flipX = 0
         ins.flipY = 0
@@ -60,19 +60,15 @@ for (var i = 0; i < array_length(data.instances); i++)
             ins.image_yscale *= -1
         }
 
-
         // NEW: All variable basis
         var varNames = variable_struct_get_names(struct_get(insData, "variables"))
         for (var j = 0; j < array_length(varNames); j++)
         {
             if is_variable_param(varNames[j])
             {
-                show_debug_message("WHY NO WORKL")
                 var val = gml_Script_varValue_ressolve(struct_get(struct_get(insData, "variables"), varNames[j]))
                 array_push(varInsts, [is_start_variable_param(varNames[j]), ins.id, varNames[j], val])
             }
-            if (varNames[j] != "x" && varNames[j] != "y")
-                variable_instance_set(ins, varNames[j], gml_Script_varValue_ressolve(struct_get(struct_get(insData, "variables"), varNames[j]), gml_Script_varName_getType(varNames[j])))
         }
         // NEW: end of NEW.
     }

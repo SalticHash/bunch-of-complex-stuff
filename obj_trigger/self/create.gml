@@ -12,7 +12,10 @@ activated = 0;
 
 image_blend = c_gray
 
-execute = function() {}
+execute = function() {
+    self.set_color()
+    self.trigger_targets()
+}
 
 trigger = function() {
 

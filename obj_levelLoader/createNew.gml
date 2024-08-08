@@ -36,12 +36,6 @@ for (var i = 0; i < array_length(data.instances); i++)
                 var varNames = variable_struct_get_names(struct_get(insData, "variables"))
                 for (var j = 0; j < array_length(varNames); j++)
                 {
-                    if is_variable_param(varNames[j])
-                    {
-                        show_debug_message("WHY NO WORKL")
-                        var val = gml_Script_varValue_ressolve(struct_get(struct_get(insData, "variables"), varNames[j]))
-                        array_push(varInsts, [is_start_variable_param(varNames[j]), ins.id, varNames[j], val])
-                    }
                     if (varNames[j] != "x" && varNames[j] != "y")
                         variable_instance_set(ins, varNames[j], gml_Script_varValue_ressolve(struct_get(struct_get(insData, "variables"), varNames[j]), gml_Script_varName_getType(varNames[j])))
                 }
@@ -72,39 +66,16 @@ for (var i = 0; i < array_length(data.instances); i++)
                 {
                     if is_variable_param(varNames[j])
                     {
-                        show_debug_message("WHY NO WORKL")
                         var val = gml_Script_varValue_ressolve(struct_get(struct_get(insData, "variables"), varNames[j]))
                         array_push(varInsts, [is_start_variable_param(varNames[j]), ins.id, varNames[j], val])
                     }
-                    if (varNames[j] != "x" && varNames[j] != "y")
-                        variable_instance_set(ins, varNames[j], gml_Script_varValue_ressolve(struct_get(struct_get(insData, "variables"), varNames[j]), gml_Script_varName_getType(varNames[j])))
                 }
                 // NEW: end of NEW.
             }
         }
     }
 }
-for (var k = 0; k < array_length(varInsts); k++)
-{
-    var inst = varInsts[k]
-    var inst_start = inst[0]
-    var inst_id = inst[1]
-    var inst_name = inst[2]
-    var inst_val = inst[3]
-    var inst_local = string_starts_with(inst_name, "v")
-    if inst_local
-    {
-        var target_local = string_delete(inst_name, 1, 3)
-        var target_global = inst_val
-        set_global_to_local(inst_id, target_global, target_local)
-    }
-    else
-    {
-        target_global = string_delete(inst_name, 1, 3)
-        target_local = inst_val
-        set_local_to_global(inst_id, target_local, target_global)
-    }
-}
+
 var tileLayers = variable_struct_get_names(_stGet("data.tile_data"))
 for (i = 0; i < array_length(tileLayers); i++)
     initTileLayer(int64(tileLayers[i]), 1)

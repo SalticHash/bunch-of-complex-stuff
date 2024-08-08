@@ -75,26 +75,39 @@ function roomPath2() //gml_Script_roomPath2
 function saveData() //gml_Script_saveData
 {
     data.editorVersion = editorVersion
-    var jText = json_stringify(data, 1)
-    var b = 1
-    var p = "levels/{level}/rooms/"
-    var backup = mod_folder(fstring(p + "backups/{lvlRoom}_wfixed.backup"))
-    var oldBackupDir = mod_folder(fstring(p + "backups"))
-    var rBackup = "backups/" + backup
-
 
     // NEW: save ids as string
     for (var i = 0; i < array_length(data.instances); i++)
     {
         inst = data.instances[i]
-        objectId = inst.object
+        var objectId = inst.object
         if (typeof(objectId) != "string") {
             objectId = object_get_name(objectId)
+            inst.object = objectId
+            show_message("Saving object" + objectId)
+        }
+    }
+    // NEW: end of NEW
+
+    var jText = json_stringify(data, 1)
+
+    // NEW: reset object id as number
+    for (var i = 0; i < array_length(data.instances); i++) {
+        inst = data.instances[i]
+        var objectId = inst.object
+        if (typeof(objectId) == "string")
+        {
+            objectId = asset_get_index(objectId)
             inst.object = objectId
         }
     }
     // NEW: end of NEW
 
+    var b = 1
+    var p = "levels/{level}/rooms/"
+    var backup = mod_folder(fstring(p + "backups/{lvlRoom}_wfixed.backup"))
+    var oldBackupDir = mod_folder(fstring(p + "backups"))
+    var rBackup = "backups/" + backup
 
     if directory_exists(oldBackupDir)
     {
@@ -121,18 +134,6 @@ function saveData() //gml_Script_saveData
     gml_Script_json_save(jText, (rBackup + "4"))
     level_save(level, levelSettings)
     obj_modAssets.saveNotice = 120
-
-    // NEW: reset object id as number
-    for (var i = 0; i < array_length(data.instances); i++) {
-        inst = data.instances[i]
-        objectId = inst.object
-        if (typeof(objectId) == "string")
-        {
-            objectId = asset_get_index(objectId)
-            inst.object = objectId
-        }
-    }
-    // NEW: end of NEW
 }
 
 function saveData2() //gml_Script_saveData2
@@ -150,8 +151,8 @@ function saveData2() //gml_Script_saveData2
             var st_names = variable_struct_get_names(data3[0])
             var pass = 1
 
-            // NEW: more name id...
-            objectId = array_get(data.instances, i).object
+            // NEW: object id to number if its string
+            var objectId = array_get(data.instances, i).object
             if (typeof(objectId) == "string")
             {
                 objectId = asset_get_index(objectId)
@@ -299,7 +300,33 @@ function saveData2() //gml_Script_saveData2
     variable_struct_set(data2, "backgrounds", st_backgroundsinst)
     var st_properties = struct_get(data, "properties")
     variable_struct_set(data2, "properties", st_properties)
+
+    // NEW: save ids as string
+    for (var i = 0; i < array_length(data.instances); i++)
+    {
+        inst = data.instances[i]
+        var objectId = inst.object
+        if (typeof(objectId) != "string") {
+            objectId = object_get_name(objectId)
+            inst.object = objectId
+        }
+    }
+    // NEW: end of NEW
+
     var jText = json_stringify(data2, 1)
+    
+    // NEW: reset object id as number
+    for (var i = 0; i < array_length(data.instances); i++) {
+        inst = data.instances[i]
+        var objectId = inst.object
+        if (typeof(objectId) == "string")
+        {
+            objectId = asset_get_index(objectId)
+            inst.object = objectId
+        }
+    }
+    // NEW: end of NEW
+
     var b = 1
     var p = "levels/{level}/rooms/"
     var backup = mod_folder(fstring(p + "backups/{lvlRoom}.backup"))
@@ -349,7 +376,7 @@ function loadData() //gml_Script_loadData
 
             // NEW: load object id as number
             inst = data.instances[i]
-            objectId = inst.object
+            var objectId = inst.object
             if (typeof(objectId) == "string")
             {
                 objectId = asset_get_index(objectId)
@@ -405,7 +432,8 @@ function initInst(argument0) //gml_Script_initInst
     var ins = instance_create_layer(struct_get(struct_get(insData, "variables"), "x"), struct_get(struct_get(insData, "variables"), "y"), layer_get_id(gml_Script_layerFormat("Instances", l)), obj_editorInst)
     
 
-    // NEW: more name id...    objectId = insData.object
+    // NEW: object id to number if its string  
+    var objectId = insData.object
     if (typeof(objectId) == "string")
     {
         objectId = asset_get_index(objectId)
