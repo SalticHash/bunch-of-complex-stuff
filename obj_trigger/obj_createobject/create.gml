@@ -42,12 +42,12 @@ execute = function()
         {
             with (create_debris((x + (random_range(0, sprite_width))), (y + (random_range(0, sprite_height))), particle_spr, 1))
             {
-                hsp = random_range(p_hsp_min, p_hsp_max)
-                vsp = random_range(p_vsp_min, p_vsp_max)
-                grav = p_grav
-                image_speed = p_img_sp
-                if (p_rng_spr) {
-                    image_index = random_range(0, (image_number - 1))
+                hsp = random_range(other.p_hsp_min, other.p_hsp_max)
+                vsp = random_range(other.p_vsp_min, other.p_vsp_max)
+                grav = other.p_grav
+                image_speed = other.p_img_sp
+                if (other.p_rng_spr) {
+                    image_index = random_range(0, (other.image_number - 1))
                 }
             }
         }
