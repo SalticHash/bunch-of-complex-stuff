@@ -1062,7 +1062,7 @@
 			["activated", ["true", "false"], {"noCustom": true}]
 		],
 		"|obj_variable|": ["name", "value"],
-		"|obj_delay|": ["delay"],
+		"|obj_delay|": ["delay", ["reset", ["true", "false"], {"noCustom": true}]],
 		"|obj_compare|": [
 			["op", ["=", "!=", ">", "<", ">=", "<=", "or", "and"]],
 			"a", "b"
