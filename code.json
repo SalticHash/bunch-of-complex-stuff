@@ -47,7 +47,6 @@
       "solid": false,
       "events": [
         {"eventType": "create", "scriptName": "gml_Object_obj_delay_Create_0"},
-        {"eventType": "collision", "subtypeID": "obj_player", "scriptName": "gml_Object_obj_delay_Collision_obj_player"},
         {"eventType": "alarm", "subtypeID": "0", "scriptName": "gml_Object_obj_delay_Alarm_0"}
       ]
     },
