@@ -9,15 +9,15 @@ if (!lockCursorMode)
 cursorImage = 0
 if (doubleClickTimer > 0)
     doubleClickTimer--
-var updateUndo = (mouse_check_button_pressed(mb_left) || mouse_check_button_pressed(mb_right) || keyboard_check_pressed(ord("F")) || keyboard_check_pressed(vk_backspace))
-if updateUndo
+var updateUndo = (mouse_check_button_pressed(mb_left) ? true : (mouse_check_button_pressed(mb_right) ? true : (keyboard_check_pressed(ord("F")) ? true : keyboard_check_pressed(vk_backspace))))
+if (updateUndo && (!inVarMenu))
 {
     prevData = json_stringify(data)
     updateUndoMemory = 1
 }
 var zoomChange = 0
 var onGridPos = [((floor(mouse_x / gridSize)) * gridSize), ((floor(mouse_y / gridSize)) * gridSize), ((round(mouse_x / gridSize)) * gridSize), ((round(mouse_y / gridSize)) * gridSize)]
-if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
+if (w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale)) && (!inVarMenu))
 {
     switch editor_state
     {
@@ -32,7 +32,7 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                     objFlipY %= 2
                     var absorber = noone
                     var candidates = ds_list_create()
-                    collision_circle_list(mouse_x, mouse_y, 16, 1125, 1, 1, candidates, 1)
+                    collision_circle_list(mouse_x, mouse_y, 16, 1216, 1, 1, candidates, 1)
                     for (var j = 0; j < ds_list_size(candidates); j++)
                     {
                         if (absorber == noone)
@@ -56,7 +56,7 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                             var objOff = sprite_get_yoffset(objSpr)
                             var objBord = [sprite_get_bbox_top(objSpr), sprite_get_bbox_bottom(objSpr)]
                             var colls = ds_list_create()
-                            collision_rectangle_list((x - gridSize / 2), (y - objOff + objBord[0]), (x + gridSize / 2), (y - objOff + objBord[1]), 1125, 1, 1, colls, 1)
+                            collision_rectangle_list((x - gridSize / 2), (y - objOff + objBord[0]), (x + gridSize / 2), (y - objOff + objBord[1]), 1216, 1, 1, colls, 1)
                             for (var i = 0; i < ds_list_size(colls); i++)
                             {
                                 var cInst = ds_list_find_value(colls, i)
@@ -81,55 +81,29 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                         y += ((targety - y) / 6)
                         instOn = absorber
                     }
-                    if keyboard_check(ord("B"))
+                    if (keyboard_check_pressed(ord("B")) && (!inMenu))
                     {
-                        var varNameB = get_string("variable name:", "")
-                        if (varNameB != "")
+                        if (!instance_exists(obj_varstorage))
                         {
-                            var varValueB = get_string((varNameB + " value:"), "")
-                            if (varValueB != "")
+                            with (instance_create(x, y, obj_varstorage))
                             {
-                                if string_count("spr", varNameB)
-                                {
-                                    if _spr_exists(varValueB)
-                                    {
-                                        var noDotB = string_replace(varValueB, ".", "")
-                                        if (string_digits(noDotB) == noDotB)
-                                            varValueB = real(varValueB)
-                                        var varTogether = struct_new([[varNameB, varValueB]])
-                                        if (!instance_exists(obj_varstorage))
-                                        {
-                                            with (instance_create(x, y, obj_varstorage))
-                                                variable_instance_set(id, ("var" + string(array_length(variable_instance_get_names(id)))), varTogether)
-                                        }
-                                        else
-                                        {
-                                            with (obj_varstorage)
-                                                variable_instance_set(id, ("var" + string(array_length(variable_instance_get_names(id)))), varTogether)
-                                        }
-                                    }
-                                    else
-                                        show_message("That sprite does not exist")
-                                }
-                                else
-                                {
-                                    noDotB = string_replace(varValueB, ".", "")
-                                    if (string_digits(noDotB) == noDotB)
-                                        varValueB = real(varValueB)
-                                    varTogether = struct_new([[varNameB, varValueB]])
-                                    if (!instance_exists(obj_varstorage))
-                                    {
-                                        with (instance_create(x, y, obj_varstorage))
-                                            variable_instance_set(id, ("var" + string(array_length(variable_instance_get_names(id)))), varTogether)
-                                    }
-                                    else
-                                    {
-                                        with (obj_varstorage)
-                                            variable_instance_set(id, ("var" + string(array_length(variable_instance_get_names(id)))), varTogether)
-                                    }
-                                }
+                                values = struct_new([["variables", struct_new()], ["object", 1227]])
+                                absorberList = []
                             }
                         }
+                        var c = wCanvas_open("instanceMenu", clamp((cursorX / w_scale), 100, (obj_screensizer.actual_width - 300)), clamp((cursorY / w_scale - 64), 100, (obj_screensizer.actual_height - 200)))
+                        struct_set(c, [["instance", 1227]])
+                        struct_set(c, [["hovering", -1]])
+                        preset = 1
+                        inMenu = 1
+                    }
+                    if (keyboard_check_pressed(ord("G")) && (!inMenu) && (!inVarMenu))
+                    {
+                        show_message(string(objSelected) + ", " + object_get_name(objSelected))
+                        array_push(objFolders.Custom, object_get_name(objSelected))
+                        show_message(struct_get(global.objectData.folders, "Custom"))
+                        gml_Script_json_save(global.objectData, objDataPath())
+                        show_message("Pass 3")
                     }
                     if keyboard_check(vk_shift)
                     {
@@ -145,7 +119,7 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                             {
                                 _temp = cInst.instID
                                 o = _stGet("data.instances[_temp].object")
-                                if (object_get_parent(o) == 517 || o == obj_solid)
+                                if (object_get_parent(o) == 574 || o == obj_solid)
                                 {
                                     while (collision_rectangle((x - gridSize / 2), (y - objOff + objBord[0]), (x + gridSize / 2), (y - objOff + objBord[1]), cInst, 1, 1) != -4)
                                         y--
@@ -166,31 +140,20 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                                 obj_savesystem.instanceIDList = ds_list_create()
                             }
                             if (objSelected == obj_exitgate)
-                                addInst(804, (x - 16), (y + 96))
+                                addInst(868, (x - 16), (y + 96))
                             o = addInst(objSelected, x, y, [])
                             inst_setVar(o.instID, "flipX", objFlipX)
                             inst_setVar(o.instID, "flipY", objFlipY)
                             if instance_exists(obj_varstorage)
                             {
-                                var storedvals = variable_instance_get_names(obj_varstorage.id)
-                                for (k = 0; k < array_length(storedvals); k++)
+                                var storedStructNames = variable_struct_get_names(obj_varstorage.values.variables)
+                                for (k = 0; k < array_length(storedStructNames); k++)
                                 {
-                                    var storedstruct = variable_instance_get(obj_varstorage.id, storedvals[k])
-                                    var structname = variable_struct_get_names(storedstruct)
-                                    inst_setVar(o.instID, structname[0], variable_struct_get(storedstruct, structname[0]))
+                                    var storedStructVal = variable_struct_get(obj_varstorage.values.variables, storedStructNames[k])
+                                    inst_setVar(o.instID, storedStructNames[k], storedStructVal)
                                 }
                             }
                             instance_update_variables(o, _stGet("data.instances[" + string(o.instID) + "]"))
-                            if (objSelected == obj_noisesatellite)
-                            {
-                                var savename2 = "/" + (string_replace_all(string_replace_all(global.towerSDirect, ".tower.ini", ""), "/", "")) + "10"
-                                var savename = "saves/" + (concat("saveData", savename2, ".ini"))
-                                obj_savesystem.satellitenumber += 1
-                                ini_open("saves/" + (concat("noisesatellite", ".ini")))
-                                ini_write_real("noisesatellite", global.levelName, obj_savesystem.satellitenumber)
-                                savename = ini_close()
-                                gamesave_async_save()
-                            }
                         }
                     }
                     else if mouse_check_button_pressed(mb_left)
@@ -198,15 +161,14 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                         var abName = struct_get(global.objectData.questionBlocks, object_get_name(_stGet("data.instances[" + string(absorber.instID) + "].object")))
                         if instance_exists(obj_varstorage)
                         {
-                            storedvals = variable_instance_get_names(obj_varstorage.id)
-                            variable_instance_set(obj_varstorage.id, "absorberList", [])
-                            array_push(obj_varstorage.id.absorberList, objSelected)
-                            for (k = 0; k < array_length(storedvals); k++)
+                            storedStructNames = variable_struct_get_names(obj_varstorage.values.variables)
+                            array_push(obj_varstorage.absorberList, objSelected)
+                            for (k = 0; k < array_length(storedStructNames); k++)
                             {
-                                storedstruct = variable_instance_get(obj_varstorage.id, storedvals[k])
-                                array_push(obj_varstorage.id.absorberList, storedstruct)
+                                storedStructVal = variable_struct_get(obj_varstorage.values.variables, storedStructNames[k])
+                                array_push(obj_varstorage.absorberList, struct_new([[storedStructNames[k], storedStructVal]]))
                             }
-                            inst_setVar(absorber.instID, abName, obj_varstorage.id.absorberList)
+                            inst_setVar(absorber.instID, abName, obj_varstorage.absorberList)
                         }
                         else
                             inst_setVar(absorber.instID, abName, object_get_name(objSelected))
@@ -224,7 +186,7 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                             obj_savesystem.instanceIDList = ds_list_create()
                         }
                         var delList = ds_list_create()
-                        var del = collision_point_list(mouse_x, mouse_y, 1125, 1, 1, delList, 1)
+                        var del = collision_point_list(mouse_x, mouse_y, 1216, 1, 1, delList, 1)
                         var foundIt = 0
                         cursorImage = 6
                         for (i = 0; i < ds_list_size(delList); i++)
@@ -235,16 +197,6 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                                 _temp = delInst.instID
                                 if (layer_instances == _stGet("data.instances[_temp].layer"))
                                 {
-                                    if (delInst.sprite_index == spr_noisesatellite)
-                                    {
-                                        savename2 = "/" + (string_replace_all(string_replace_all(global.towerSDirect, ".tower.ini", ""), "/", "")) + "10"
-                                        savename = "saves/" + (concat("saveData", savename2, ".ini"))
-                                        obj_savesystem.satellitenumber -= 1
-                                        ini_open("saves/" + (concat("noisesatellite", ".ini")))
-                                        ini_write_real("noisesatellite", global.levelName, obj_savesystem.satellitenumber)
-                                        savename = ini_close()
-                                        gamesave_async_save()
-                                    }
                                     _stSet("data.instances[_temp].deleted", 1)
                                     ds_stack_push(deletedIndexes, delInst.instID)
                                     instance_destroy(delInst)
@@ -271,8 +223,6 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                             obj_selectorobj.image_yscale = (-(((initialY - (mouse_y - 1)) / 32)))
                         }
                     }
-                    else
-                        checkSelector = 0
                     break
                 case 1:
                     cursorImage = 5
@@ -347,7 +297,7 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                     }
                     var stretchDir = array_duplicate(cursorStretch)
                     var insList = ds_list_create()
-                    var insNum = collision_circle_list(mouse_x, mouse_y, 600, 1125, 1, 1, insList, 1)
+                    var insNum = collision_circle_list(mouse_x, mouse_y, 600, 1216, 1, 1, insList, 1)
                     var onIns = noone
                     var isOn = 0
                     for (i = 0; i < insNum; i++)
@@ -376,7 +326,12 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                         cursorNotice = "Double click to edit variables\nPress X/Y to flip"
                         if (keyboard_check_pressed(ord("V")) || (mouse_check_button_pressed(mb_left) && doubleClickTimer > 0))
                         {
-                            var c = wCanvas_open("instanceMenu", clamp((cursorX / w_scale), 100, (obj_screensizer.actual_width - 300)), clamp((cursorY / w_scale - 64), 100, (obj_screensizer.actual_height - 200)))
+                            if (w_findCanvasIndex("instanceMenu") != -1)
+                            {
+                                w_openCanvas[w_findCanvasIndex("instanceMenu")].quickerase = 1
+                                wCanvas_close("instanceMenu")
+                            }
+                            c = wCanvas_open("instanceMenu", clamp((cursorX / w_scale), 100, (obj_screensizer.actual_width - 300)), clamp((cursorY / w_scale - 64), 100, (obj_screensizer.actual_height - 200)))
                             struct_set(c, [["instance", onIns]])
                             struct_set(c, [["hovering", -1]])
                         }
@@ -465,8 +420,10 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                                 act = 4
                         }
                     }
-                    if keyboard_check_pressed(ord("X"))
-                        variable_struct_set(tilesetStruct, "scale", ((struct_get(tilesetStruct, "scale")) * -1))
+                    if (keyboard_check_pressed(ord("X")) && tilesetCoord[2] == 1 && tilesetCoord[3] == 1)
+                        tileFlipX = (-tileFlipX)
+                    if (keyboard_check_pressed(ord("Y")) && tilesetCoord[2] == 1 && tilesetCoord[3] == 1)
+                        tileFlipY = (-tileFlipY)
                     if (act != 0 && act < 3)
                     {
                         for (var tX = 0; tX < tilesetCoord[2]; tX++)
@@ -476,7 +433,7 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                                 if (act == 1)
                                 {
                                     var coords = [(tilesetCoord[0] + tX), (tilesetCoord[1] + tY)]
-                                    addTile(tilesetSelected, coords, (x + tilesetStruct.size[0] * tX), (y + tilesetStruct.size[1] * tY))
+                                    addTile(tilesetSelected, coords, (x + tilesetStruct.size[0] * tX), (y + tilesetStruct.size[1] * tY), 0, tileFlipX, tileFlipY)
                                 }
                                 else
                                     deleteTile((x + tilesetStruct.size[0] * tX), (y + tilesetStruct.size[1] * tY))
@@ -684,12 +641,19 @@ if w_isOnCanvas(w_openCanvas[0], (cursorX / w_scale), (cursorY / w_scale))
                     cursorImage = 2
             }
             break
+        case st_popup:
+            if mouse_check_button(mb_left)
+            {
+                editor_state = st_edit
+                editorWindowUpdate()
+            }
+            break
     }
 
     zoomChange = mouse_wheel_down() - mouse_wheel_up()
     if (zoomChange == 0)
         zoomChange = keyboard_check_pressed(ord("E")) - keyboard_check_pressed(ord("Q"))
-    if (zoomChange != 0)
+    if (zoomChange != 0 && (!inVarMenu))
     {
         if (zoomChange > 0)
             camZoom *= 2
@@ -732,12 +696,12 @@ if (zoomChange != 0)
 prevMousePos = [mouse_x, mouse_y]
 var t = w_findCanvasIndex("tileset")
 var canMoveCam = 1
-if (t >= obj_bossdoor)
+if (t >= obj_noisecredit)
 {
     if w_isOnCanvas(w_openCanvas[t], (cursorX / w_scale), (cursorY / w_scale))
         canMoveCam = 0
 }
-if canMoveCam
+if (canMoveCam && (!inVarMenu))
 {
     var scrollSpd = 8 + 8 * keyboard_check(vk_shift)
     cam_x += ((keyboard_check(ord("D")) - keyboard_check(ord("A"))) * scrollSpd * camZoom)
@@ -753,280 +717,608 @@ for (i = 0; i < array_length(w_openCanvas); i++)
     wCanvas_step(c, onX, onY, (cursorX / w_scale), (cursorY / w_scale))
     if w_isOnCanvas(c, (cursorX / w_scale), (cursorY / w_scale))
     {
-        switch c.name
+        if (c.growx == ((c.x + c.width) * w_scale))
         {
-            case "toolbar":
-                var mInd = floor(onX / 50)
-                if (mInd > -1)
-                    toolbarHovering = mInd
-                if mouse_check_button_pressed(mb_left)
-                {
-                    if (mInd == editor_state)
-                        editor_state = -1
-                    else if (mInd > -1)
-                    {
+            switch c.name
+            {
+                case "toolbar":
+                    var mInd = floor(onX / 50)
+                    if (mInd > -1)
                         toolbarHovering = mInd
-                        switch mInd
-                        {
-                            case st_instances:
-                            case st_tiles:
-                            case st_backgrounds:
-                            case st_rooms:
-                            case st_settings:
-                                editor_state = mInd
-                                break
-                            case st_save:
-                                saveData()
-                                saveData2()
-                                break
-                            case st_play:
-                                playRoom()
-                                break
-                            case st_edit:
-                                if (editor_state == 0 || editor_state == 1)
-                                    selectingMode = (!selectingMode)
-                                break
-                        }
-
-                    }
-                    editorWindowUpdate()
-                }
-                break
-            case "objFolders":
-                var onFolder = clamp(floor(onY / _stGet("w_canvas.objFolders.gridSize[1]")), 0, (array_length(variable_struct_get_names(objFolders)) - 1))
-                struct_set(c, [["scrollBorders", [0, (array_length(variable_struct_get_names(objFolders)) * _stGet("w_canvas.objFolders.gridSize[1]") - c.height)]]])
-                if mouse_check_button_pressed(mb_left)
-                    objFolderSelected = onFolder
-                break
-            case "objGrid":
-                var og = _stGet("w_canvas.objGrid")
-                var folderNames = objFolderOrder
-                var objs = _stGet("objFolders." + folderNames[objFolderSelected])
-                struct_set(c, [["scrollBorders", [0, ((array_length(objs) / og.columns + 1) * og.gridSize - c.height)]]])
-                var objCoord = [floor(onX / og.gridSize), floor(onY / og.gridSize)]
-                if (objCoord[0] == clamp(objCoord[0], 0, og.columns) && objCoord[1] == clamp(objCoord[1], 0, (array_length(objs) / og.columns)))
-                {
-                    var objInd = (objCoord[0] % og.columns) + objCoord[1] * og.columns
-                    if (objInd < array_length(objs))
+                    if mouse_check_button_pressed(mb_left)
                     {
-                        cursorNotice = object_get_name(objs[objInd])
+                        if inVarMenu
+                            inVarMenu = 0
+                        if (mInd == editor_state)
+                            editor_state = -1
+                        else if (mInd > -1)
+                        {
+                            toolbarHovering = mInd
+                            windowQuickErase = 1
+                            switch mInd
+                            {
+                                case st_instances:
+                                case st_tiles:
+                                case st_backgrounds:
+                                case st_rooms:
+                                case st_settings:
+                                case st_debug:
+                                case st_editorsettings:
+                                    editor_state = mInd
+                                    break
+                                case st_save:
+                                    saveData()
+                                    break
+                                case st_play:
+                                    fromStart = 0
+                                    playRoom()
+                                    break
+                                case st_edit:
+                                    if (editor_state == 0 || editor_state == 1)
+                                        selectingMode = (!selectingMode)
+                                    break
+                                case st_start:
+                                    fromStart = 1
+                                    playRoom()
+                                    break
+                            }
+
+                        }
+                        editorWindowUpdate()
+                    }
+                    break
+                case "objFolders":
+                    var onFolder = clamp(floor(onY / _stGet("w_canvas.objFolders.gridSize[1]")), 0, (array_length(variable_struct_get_names(objFolders)) - 1))
+                    struct_set(c, [["scrollBorders", [0, (array_length(variable_struct_get_names(objFolders)) * _stGet("w_canvas.objFolders.gridSize[1]") - c.height)]]])
+                    if mouse_check_button_pressed(mb_left)
+                        objFolderSelected = onFolder
+                    break
+                case "objGrid":
+                    var og = _stGet("w_canvas.objGrid")
+                    var folderNames = objFolderOrder
+                    var objs = _stGet("objFolders." + folderNames[objFolderSelected])
+                    struct_set(c, [["scrollBorders", [0, ((array_length(objs) / og.columns + 1) * og.gridSize - c.height)]]])
+                    var objCoord = [floor(onX / og.gridSize), floor(onY / og.gridSize)]
+                    if (objCoord[0] == clamp(objCoord[0], 0, og.columns) && objCoord[1] == clamp(objCoord[1], 0, (array_length(objs) / og.columns)))
+                    {
+                        var objInd = (objCoord[0] % og.columns) + objCoord[1] * og.columns
+                        if (objInd < array_length(objs))
+                        {
+                            cursorNotice = object_get_name(objs[objInd])
+                            if mouse_check_button_pressed(mb_left)
+                            {
+                                objSelected = objs[objInd]
+                                if instance_exists(obj_varstorage)
+                                {
+                                    preset = 0
+                                    inVarMenu = 0
+                                    instance_destroy(obj_varstorage)
+                                }
+                            }
+                        }
+                    }
+                    break
+                case "tilesetFolders":
+                    mInd = floor(onX / 110)
+                    if (mInd == clamp(mInd, 0, (array_length(global.tilesetData.order) - 1)))
+                    {
                         if mouse_check_button_pressed(mb_left)
                         {
-                            objSelected = objs[objInd]
-                            if instance_exists(obj_varstorage)
-                                instance_destroy(obj_varstorage)
+                            tilesetFolder = mInd
+                            windowQuickErase = 1
+                            windowQuickDraw = 1
+                            editorWindowUpdate()
                         }
                     }
-                }
-                break
-            case "tilesetFolders":
-                mInd = floor(onX / 110)
-                if (mInd == clamp(mInd, 0, (array_length(global.tilesetData.order) - 1)))
-                {
+                    break
+                case "tilesetList":
+                    mInd = floor(onY / c.sep)
+                    tileset_listScroll = c.scroll_y
+                    var order = global.tilesetData.order
+                    var sets = struct_get(global.tilesetData.folders, order[tilesetFolder])
+                    if (mInd == clamp(mInd, 0, (array_length(sets) - 1)))
+                    {
+                        if mouse_check_button_pressed(mb_left)
+                        {
+                            tilesetSelected = sets[mInd]
+                            tileset_autotileIndex = 0
+                            windowQuickErase = 1
+                            windowQuickDraw = 1
+                            editorWindowUpdate()
+                            var tsSprite = _spr(tilesetSelected)
+                            var tCanvas = w_openCanvas[w_findCanvasIndex("tileset")]
+                            struct_set(tCanvas, [["scrollBorders", [(sprite_get_width(tsSprite) - tCanvas.width), (2 * sprite_get_height(tsSprite) - tCanvas.height)]]])
+                        }
+                    }
+                    break
+                case "tileset":
+                    var tScale = tilesetStruct.scale
+                    var w = tilesetStruct.size[0] * tScale
+                    var h = tilesetStruct.size[1] * tScale
+                    var sc = keyboard_check_pressed(ord("Q")) - keyboard_check_pressed(ord("E"))
+                    if (sc != 0)
+                    {
+                        c.zoom *= power(1.25, sc)
+                        struct_set(c, [["scroll_x", (c.scroll_x * (power(1.25, sc)))], ["scroll_y", (c.scroll_y * (power(1.25, sc)))]])
+                    }
+                    onX /= c.zoom
+                    onY /= c.zoom
+                    tsSprite = _spr(tilesetSelected)
+                    var tex = sprite_get_texture(tsSprite, 0)
+                    if ((!tileset_doAutoTile) || w_findCanvasIndex("autotileEditor") != -1)
+                    {
+                        struct_set(c, [["scrollBorders", [(sprite_get_width(tsSprite) * tScale - c.width), (texture_get_height(tex) / texture_get_texel_height(tex) * tScale - c.height)]]])
+                        cursorNotice = "Press Q/E to zoom in/out"
+                    }
+                    else
+                        struct_set(c, [["scrollBorders", [(10 * gridSize - c.width), 0]]])
+                    mInd = [floor(onX / gridSize), floor(onY / gridSize)]
                     if mouse_check_button_pressed(mb_left)
                     {
-                        tilesetFolder = mInd
-                        editorWindowUpdate()
+                        if (!keyboard_check(vk_control))
+                        {
+                            tilesetCoord_editing = tilesetCoord
+                            tilesetCoord_spread = [tilesetCoord]
+                        }
+                        else
+                        {
+                            var newArray = [0, 0, 1, 1]
+                            array_push(tilesetCoord_spread, newArray)
+                            tilesetCoord_editing = newArray
+                        }
+                        tilesetCoord_editing[0] = mInd[0]
+                        tilesetCoord_editing[1] = mInd[1]
+                        tilesetCoord_editing[2] = 1
+                        tilesetCoord_editing[3] = 1
                     }
-                }
-                break
-            case "tilesetList":
-                mInd = floor(onY / c.sep)
-                tileset_listScroll = c.scroll_y
-                var order = global.tilesetData.order
-                var sets = struct_get(global.tilesetData.folders, order[tilesetFolder])
-                if (mInd == clamp(mInd, 0, (array_length(sets) - 1)))
-                {
-                    if mouse_check_button_pressed(mb_left)
+                    if mouse_check_button(mb_left)
                     {
-                        tilesetSelected = sets[mInd]
-                        tileset_autotileIndex = 0
-                        editorWindowUpdate()
-                        var tsSprite = _spr(tilesetSelected)
-                        var tCanvas = w_openCanvas[w_findCanvasIndex("tileset")]
-                        struct_set(tCanvas, [["scrollBorders", [(sprite_get_width(tsSprite) - tCanvas.width), (2 * sprite_get_height(tsSprite) - tCanvas.height)]]])
+                        tilesetCoord_editing[2] = clamp((mInd[0] - tilesetCoord_editing[0] + 1), 1, 200)
+                        tilesetCoord_editing[3] = clamp((mInd[1] - tilesetCoord_editing[1] + 1), 1, 200)
                     }
-                }
-                break
-            case "tileset":
-                var tScale = tilesetStruct.scale
-                var w = tilesetStruct.size[0] * tScale
-                var h = tilesetStruct.size[1] * tScale
-                var sc = keyboard_check_pressed(ord("Q")) - keyboard_check_pressed(ord("E"))
-                if (sc != 0)
-                {
-                    c.zoom *= power(1.25, sc)
-                    struct_set(c, [["scroll_x", (c.scroll_x * (power(1.25, sc)))], ["scroll_y", (c.scroll_y * (power(1.25, sc)))]])
-                }
-                onX /= c.zoom
-                onY /= c.zoom
-                tsSprite = _spr(tilesetSelected)
-                var tex = sprite_get_texture(tsSprite, 0)
-                if ((!tileset_doAutoTile) || w_findCanvasIndex("autotileEditor") != -1)
-                {
-                    struct_set(c, [["scrollBorders", [(sprite_get_width(tsSprite) * tScale - c.width), (texture_get_height(tex) / texture_get_texel_height(tex) * tScale - c.height)]]])
-                    cursorNotice = "Press Q/E to zoom in/out"
-                }
-                else
-                    struct_set(c, [["scrollBorders", [(10 * gridSize - c.width), 0]]])
-                mInd = [floor(onX / gridSize), floor(onY / gridSize)]
-                if mouse_check_button_pressed(mb_left)
-                {
-                    if (!keyboard_check(vk_control))
+                    break
+                case "bgs":
+                    if (_stGet("data.backgrounds." + string(layer_background)) == undefined)
                     {
-                        tilesetCoord_editing = tilesetCoord
-                        tilesetCoord_spread = [tilesetCoord]
+                        bgsHovering = floor(onY / 14)
+                        if mouse_check_button_pressed(mb_left)
+                        {
+                            switch bgsHovering
+                            {
+                                case 0:
+                                    editor_initBGLayer(layer_background, "burger")
+                                    break
+                                case 1:
+                                    var nd = wCanvas_open_dropdown("bgPresetDropdown", (cursorX / w_scale), (cursorY / w_scale), global.bgpreset_names, "", "bgPresetSelected")
+                                    break
+                            }
+
+                        }
                     }
                     else
                     {
-                        var newArray = [0, 0, 1, 1]
-                        array_push(tilesetCoord_spread, newArray)
-                        tilesetCoord_editing = newArray
-                    }
-                    tilesetCoord_editing[0] = mInd[0]
-                    tilesetCoord_editing[1] = mInd[1]
-                    tilesetCoord_editing[2] = 1
-                    tilesetCoord_editing[3] = 1
-                }
-                if mouse_check_button(mb_left)
-                {
-                    tilesetCoord_editing[2] = clamp((mInd[0] - tilesetCoord_editing[0] + 1), 1, 200)
-                    tilesetCoord_editing[3] = clamp((mInd[1] - tilesetCoord_editing[1] + 1), 1, 200)
-                }
-                break
-            case "bgs":
-                if (_stGet("data.backgrounds." + string(layer_background)) == undefined)
-                {
-                    bgsHovering = floor(onY / 14)
-                    if mouse_check_button_pressed(mb_left)
-                    {
-                        switch bgsHovering
-                        {
-                            case 0:
-                                editor_initBGLayer(layer_background, "burger")
-                                break
-                            case 1:
-                                var nd = wCanvas_open_dropdown("bgPresetDropdown", (cursorX / w_scale), (cursorY / w_scale), global.bgpreset_names, "", "bgPresetSelected")
-                                break
-                        }
-
-                    }
-                }
-                else
-                {
-                    bgsHovering = floor(onY / 14)
-                    if mouse_check_button_pressed(mb_left)
-                    {
-                        saveData()
-                        saveData2()
-                        bgString = "data.backgrounds." + string(layer_background)
-                        switch floor(onY / 14)
-                        {
-                            case 0:
-                                var txt = fstring("{bgString}.sprite")
-                                nd = wCanvas_open_dropdown("bigDropdown", (cursorX / w_scale), (cursorY / w_scale), spriteList, _stGet(txt), "bgImageSelected", "Input Background Sprite")
-                                break
-                            case 1:
-                                txt = fstring("{bgString}.panic_sprite")
-                                _stSet(txt, gml_Script_ask_or_not("Input Escape Background:", _stGet(txt)))
-                                break
-                            case 2:
-                            case 3:
-                                txt = bgString
-                                if (bgsHovering == 3)
-                                    txt += ".y"
-                                else
-                                    txt += ".x"
-                                _stSet(txt, real(gml_Script_ask_or_not("Input value:", _stGet(txt))))
-                                break
-                            case 4:
-                            case 5:
-                                txt = bgString
-                                if (bgsHovering == 5)
-                                    txt += ".scroll_y"
-                                else
-                                    txt += ".scroll_x"
-                                _stSet(txt, real(gml_Script_ask_or_not("Input value:", _stGet(txt))))
-                                break
-                            case 6:
-                            case 7:
-                                txt = bgString
-                                if (bgsHovering == 7)
-                                    txt += ".tile_y"
-                                else
-                                    txt += ".tile_x"
-                                _stSet(txt, (!_stGet(txt)))
-                                break
-                            case 8:
-                            case 9:
-                                txt = bgString
-                                if (bgsHovering == 9)
-                                    txt += ".vspeed"
-                                else
-                                    txt += ".hspeed"
-                                _stSet(txt, real(gml_Script_ask_or_not("Input value:", _stGet(txt))))
-                                break
-                            case 10:
-                                txt = fstring("{bgString}.image_speed")
-                                _stSet(txt, gml_Script_ask_or_not("Animation speed (in frames): ", _stGet(txt)))
-                                break
-                            case 11:
-                                var bgpName = get_string("Set a name for the new Background Preset:", prevBGPreset)
-                                if (bgpName != "")
-                                {
-                                    bgPreset_save(bgpName, data.backgrounds, 1)
-                                    ass_addBGPreset(bgpName, data.backgrounds)
-                                }
-                                break
-                            case 12:
-                                variable_struct_remove(_stGet("data.backgrounds"), string(layer_background))
-                                with (obj_customBG)
-                                {
-                                    if (layer_background == other.layer_background)
-                                        instance_destroy()
-                                }
-                                break
-                        }
-
-                    }
-                }
-                break
-            case "rooms":
-                roomHovering = floor(onY / 12)
-                var onAdd = (onX > (_stGet("w_canvas.rooms.width") - 12) && onY < 12)
-                if (roomHovering >= array_length(roomNameList) || onAdd)
-                    roomHovering = -1
-                struct_set(c, [["scrollBorders", [0, (array_length(roomNameList) * 12 - c.height)]]])
-                if mouse_check_button_pressed(mb_left)
-                {
-                    if (roomHovering != -1)
-                    {
-                        saveData()
-                        saveData2()
-                        global.editorRoomName = roomNameList[roomHovering]
-                        room_restart()
-                    }
-                    else if onAdd
-                    {
-                        var rName = get_string("New room name", ("room" + string(array_length(roomNameList))))
-                        if (rName != "")
+                        bgsHovering = floor(onY / 14)
+                        if mouse_check_button_pressed(mb_left)
                         {
                             saveData()
-                            saveData2()
-                            global.editorRoomName = rName
-                            room_restart()
+                            bgString = "data.backgrounds." + string(layer_background)
+                            switch bgsHovering
+                            {
+                                case 0:
+                                    var txt = fstring("{bgString}.sprite")
+                                    if (w_findCanvasIndex("bigDropdown") != -1)
+                                    {
+                                        w_openCanvas[w_findCanvasIndex("bigDropdown")].quickerase = 1
+                                        wCanvas_close("bigDropdown")
+                                    }
+                                    nd = wCanvas_open_dropdown("bigDropdown", (cursorX / w_scale), (cursorY / w_scale), spriteList, _stGet(txt), "bgImageSelected", "Input sprite name")
+                                    break
+                                case 1:
+                                    txt = fstring("{bgString}.panic_sprite")
+                                    if (w_findCanvasIndex("bigDropdown") != -1)
+                                    {
+                                        w_openCanvas[w_findCanvasIndex("bigDropdown")].quickerase = 1
+                                        wCanvas_close("bigDropdown")
+                                    }
+                                    nd = wCanvas_open_dropdown("bigDropdown", (cursorX / w_scale), (cursorY / w_scale), spriteList, _stGet(txt), "panicBgImageSelected", "Input sprite name")
+                                    break
+                                case 2:
+                                case 3:
+                                    txt = bgString
+                                    if (bgsHovering == 3)
+                                        txt += ".y"
+                                    else
+                                        txt += ".x"
+                                    if (bgsHovering == 3)
+                                        var showName = "Y"
+                                    else
+                                        showName = "X"
+                                    inVarMenu = 1
+                                    keyboard_string = _stGet(txt)
+                                    test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                    struct_set(test, [["instance", "background"], ["instID", txt], ["variableName", showName], ["variableValue", _stGet(txt)]])
+                                    break
+                                case 4:
+                                case 5:
+                                    txt = bgString
+                                    if (bgsHovering == 5)
+                                        txt += ".scroll_y"
+                                    else
+                                        txt += ".scroll_x"
+                                    if (bgsHovering == 5)
+                                        showName = "Scroll Y"
+                                    else
+                                        showName = "Scroll X"
+                                    inVarMenu = 1
+                                    keyboard_string = _stGet(txt)
+                                    test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                    struct_set(test, [["instance", "background"], ["instID", txt], ["variableName", showName], ["variableValue", _stGet(txt)]])
+                                    break
+                                case 6:
+                                case 7:
+                                    txt = bgString
+                                    if (bgsHovering == 7)
+                                        txt += ".tile_y"
+                                    else
+                                        txt += ".tile_x"
+                                    _stSet(txt, (!_stGet(txt)))
+                                    break
+                                case 8:
+                                case 9:
+                                    txt = bgString
+                                    if (bgsHovering == 9)
+                                        txt += ".vspeed"
+                                    else
+                                        txt += ".hspeed"
+                                    if (bgsHovering == 9)
+                                        showName = "Vspeed"
+                                    else
+                                        showName = "Hspeed"
+                                    inVarMenu = 1
+                                    keyboard_string = _stGet(txt)
+                                    test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                    struct_set(test, [["instance", "background"], ["instID", txt], ["variableName", showName], ["variableValue", _stGet(txt)]])
+                                    break
+                                case 10:
+                                    txt = fstring("{bgString}.image_speed")
+                                    showName = "Image Speed"
+                                    inVarMenu = 1
+                                    keyboard_string = _stGet(txt)
+                                    test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                    struct_set(test, [["instance", "background"], ["instID", txt], ["variableName", showName], ["variableValue", _stGet(txt)]])
+                                    break
+                                case 11:
+                                    txt = "none"
+                                    if (w_findCanvasIndex("valueDropdown") != -1)
+                                    {
+                                        w_openCanvas[w_findCanvasIndex("valueDropdown")].quickerase = 1
+                                        wCanvas_close("valueDropdown")
+                                    }
+                                    var escapeData = wCanvas_open_dropdown("valueDropdown", (cursorX / w_scale), (cursorY / w_scale), ["None", "Spawn", "Destroy"], txt, "bgEscapeData", "Set escape data")
+                                    break
+                                case 12:
+                                    txt = "none"
+                                    if (w_findCanvasIndex("valueDropdown") != -1)
+                                    {
+                                        w_openCanvas[w_findCanvasIndex("valueDropdown")].quickerase = 1
+                                        wCanvas_close("valueDropdown")
+                                    }
+                                    escapeData = wCanvas_open_dropdown("valueDropdown", (cursorX / w_scale), (cursorY / w_scale), ["None", "Peppino", "Noise", "Pogo Noise", "Vigilante", "Pepperman", "Snick"], txt, "bgCharacterData", "Set character data")
+                                    break
+                                case 13:
+                                    var bgpName = get_string("Set a name for the new Background Preset:", prevBGPreset)
+                                    if (bgpName != "")
+                                    {
+                                        bgPreset_save(bgpName, data.backgrounds, 1)
+                                        ass_addBGPreset(bgpName, data.backgrounds)
+                                    }
+                                    break
+                                case 14:
+                                    variable_struct_remove(_stGet("data.backgrounds"), string(layer_background))
+                                    with (obj_customBG)
+                                    {
+                                        if (layer_background == other.layer_background)
+                                            instance_destroy()
+                                    }
+                                    break
+                            }
+
                         }
                     }
-                }
-                break
-            case "settingTypes":
-                if mouse_check_button_pressed(mb_left)
-                    settingsMode = clamp(floor(onY / 16), 0, 1)
-                break
-            case "settings":
-                settingsHovering = -1
-                if (settingsMode == 0)
-                {
+                    break
+                case "rooms":
+                    roomHovering = floor(onY / 12)
+                    var onAdd = (onX > (_stGet("w_canvas.rooms.width") - 14) && onY < 16)
+                    var onDelete = (onX < 14 && onY < 16)
+                    if (roomHovering >= (array_length(roomNameList) + 2) || roomHovering < 2 || onAdd || onDelete)
+                        roomHovering = -1
+                    struct_set(c, [["scrollBorders", [0, ((array_length(roomNameList) + 2) * 12 - c.height)]]])
+                    if mouse_check_button_pressed(mb_left)
+                    {
+                        if (roomHovering != -1)
+                        {
+                            if (!deletingRooms)
+                            {
+                                saveData()
+                                global.editorRoomName = roomNameList[max((roomHovering - 2), 0)]
+                                room_restart()
+                            }
+                            else
+                            {
+                                var fName = gml_Script_mod_folder_afom("levels/" + global.editorLevelName + "/rooms/" + (roomNameList[max((roomHovering - 2), 0)]) + "_wfixed.json")
+                                if file_exists(fName)
+                                    file_delete(fName)
+                                fName = gml_Script_mod_folder_afom("levels/" + global.editorLevelName + "/rooms/" + (roomNameList[max((roomHovering - 2), 0)]) + ".json")
+                                file_delete(fName)
+                                array_delete(roomNameList, (roomHovering - 2), 1)
+                            }
+                        }
+                        else if onAdd
+                        {
+                            showName = "New room name"
+                            inVarMenu = 1
+                            keyboard_string = ""
+                            test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                            struct_set(test, [["instance", "rooms"], ["instID", roomNameAdd], ["variableName", showName], ["variableValue", ""]])
+                        }
+                        else if onDelete
+                        {
+                            if (deletingRooms == 0)
+                                deletingRooms = 1
+                            else
+                                deletingRooms = 0
+                        }
+                    }
+                    break
+                case "debug":
+                    mInd = floor(onY / 16)
+                    if (mInd == clamp(mInd, 0, 8))
+                        debugHovering = mInd
+                    if mouse_check_button_pressed(mb_left)
+                    {
+                        switch debugHovering
+                        {
+                            case 0:
+                                if (global.ratDeath == "False")
+                                    global.ratDeath = "True"
+                                else if (global.ratDeath == "True")
+                                    global.ratDeath = "False"
+                                break
+                            case 1:
+                                if (global.transfoBreak == "False")
+                                    global.transfoBreak = "True"
+                                else if (global.transfoBreak == "True")
+                                    global.transfoBreak = "False"
+                                break
+                            case 2:
+                                if (global.doPanic == "False")
+                                    global.doPanic = "True"
+                                else if (global.doPanic == "True")
+                                    global.doPanic = "False"
+                                break
+                            case 3:
+                                if (global.setSupertaunt == "False")
+                                    global.setSupertaunt = "True"
+                                else if (global.setSupertaunt == "True")
+                                    global.setSupertaunt = "False"
+                                break
+                            case 4:
+                                var valdropdown = wCanvas_open_dropdown("valueDropdown", (cursorX / w_scale), (cursorY / w_scale), ["A", "B", "C", "D", "E", "F", "G"], "A", "startingDoorData")
+                                break
+                            case 5:
+                                txt = "startState"
+                                showName = "Set Starting State"
+                                inVarMenu = 1
+                                keyboard_string = _stGet(txt)
+                                test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                struct_set(test, [["instance", "debug"], ["instID", txt], ["variableName", showName], ["variableValue", variable_global_get(txt)]])
+                                break
+                            case 6:
+                                txt = "startPlayerSpeed"
+                                showName = "Set Starting Speed"
+                                inVarMenu = 1
+                                keyboard_string = _stGet(txt)
+                                test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                struct_set(test, [["instance", "debug"], ["instID", txt], ["variableName", showName], ["variableValue", variable_global_get(txt)]])
+                                break
+                            case 7:
+                                break
+                            case 8:
+                                switchAssetFolder(global.modFolder, 1)
+                                room_goto(rmEditor)
+                                break
+                        }
+
+                    }
+                    break
+                case "settingTypes":
+                    if mouse_check_button_pressed(mb_left)
+                        settingsMode = clamp(floor(onY / 16), 0, 1)
+                    break
+                case "settings":
+                    settingsHovering = -1
+                    if (settingsMode == 0)
+                    {
+                        mInd = floor(onY / 16)
+                        if (mInd == clamp(mInd, 0, 13))
+                            settingsHovering = mInd
+                        if mouse_check_button_pressed(mb_left)
+                        {
+                            var switchsong = [".song", "escapeSong", "lap2Song", "lap3Song", "lap4Song", "escapeSongN", "lap2SongN", "lap3SongN", "lap4SongN"]
+                            var switchsongname = ["", "Escape", "Lap2", "Lap3", "Lap4", "EscapeN", "Lap2N", "Lap3N", "Lap4N"]
+                            switch settingsHovering
+                            {
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    if (settingsHovering == 0)
+                                        txt = "data.properties" + switchsong[settingsHovering]
+                                    if (settingsHovering == 1)
+                                        txt = levelSettings.escapeSong
+                                    if (settingsHovering == 2)
+                                        txt = levelSettings.lap2Song
+                                    if (settingsHovering == 3)
+                                        txt = levelSettings.lap3Song
+                                    if (settingsHovering == 4)
+                                        txt = levelSettings.lap4Song
+                                    if (settingsHovering == 5)
+                                        txt = levelSettings.escapeSongN
+                                    if (settingsHovering == 6)
+                                        txt = levelSettings.lap2SongN
+                                    if (settingsHovering == 7)
+                                        txt = levelSettings.lap3SongN
+                                    if (settingsHovering == 8)
+                                        txt = levelSettings.lap4SongN
+                                    var opts = array_duplicate(audioList)
+                                    opts = gml_Script_array_concat(opts, global.defaultSong_names)
+                                    if (settingsHovering == 0)
+                                        var def = _stGet(txt)
+                                    else
+                                        def = txt
+                                    if variable_struct_exists(global.defaultSong_display, def)
+                                        def = struct_get(global.defaultSong_display, def)
+                                    if (w_findCanvasIndex("bgPresetDropdown") != -1)
+                                    {
+                                        w_openCanvas[w_findCanvasIndex("bgPresetDropdown")].quickerase = 1
+                                        wCanvas_close("bgPresetDropdown")
+                                    }
+                                    nd = wCanvas_open_dropdown("bgPresetDropdown", (cursorX / w_scale), (cursorY / w_scale), opts, def, ("songSelected" + switchsongname[settingsHovering]))
+                                    break
+                                case 9:
+                                    if (levelSettings.escapePlay == "true")
+                                        levelSettings.escapePlay = "false"
+                                    else if (levelSettings.escapePlay == "false" || levelSettings.escapePlay == "")
+                                        levelSettings.escapePlay = "true"
+                                    break
+                                case 10:
+                                    txt = "data.properties.songTransitionTime"
+                                    showName = "Transition time in frames"
+                                    inVarMenu = 1
+                                    keyboard_string = _stGet(txt)
+                                    test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                    struct_set(test, [["instance", "settings"], ["instID", txt], ["variableName", showName], ["variableValue", _stGet(txt)]])
+                                    break
+                                case 11:
+                                    txt = "data.properties.pausecombo"
+                                    showName = "Pause time in frames"
+                                    inVarMenu = 1
+                                    keyboard_string = _stGet(txt)
+                                    test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                    struct_set(test, [["instance", "settings"], ["instID", txt], ["variableName", showName], ["variableValue", _stGet(txt)]])
+                                    break
+                                case 12:
+                                    editor_state = st_resize
+                                    windowQuickErase = 1
+                                    editorWindowUpdate()
+                                    break
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        mInd = floor(onY / 16)
+                        if (mInd == clamp(mInd, 0, 9))
+                            settingsHovering = mInd
+                        opts = []
+                        if mouse_check_button_pressed(mb_left)
+                        {
+                            switch settingsHovering
+                            {
+                                case 0:
+                                    txt = "levelSettings.name"
+                                    showName = "Level Name"
+                                    inVarMenu = 1
+                                    keyboard_string = _stGet(txt)
+                                    test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                    struct_set(test, [["instance", "settings"], ["instID", txt], ["variableName", showName], ["variableValue", _stGet(txt)]])
+                                    break
+                                case 1:
+                                    txt = "levelSettings.pscore"
+                                    showName = "Score for an S rank"
+                                    inVarMenu = 1
+                                    keyboard_string = _stGet(txt)
+                                    test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                    struct_set(test, [["instance", "settings"], ["instID", txt], ["variableName", showName], ["variableValue", _stGet(txt)]])
+                                    break
+                                case 2:
+                                    txt = "levelSettings.isWorld"
+                                    if (_stGet(txt) < 3)
+                                        _stSet(txt, (_stGet(txt) + 1))
+                                    else
+                                        _stSet(txt, 0)
+                                    break
+                                case 3:
+                                    txt = "levelSettings.escape"
+                                    showName = "Escape Time"
+                                    inVarMenu = 1
+                                    keyboard_string = _stGet(txt)
+                                    test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                    struct_set(test, [["instance", "settings"], ["instID", txt], ["variableName", showName], ["variableValue", timeString_get_string(_stGet(txt))]])
+                                    break
+                                case 4:
+                                    levelSettings.fescape = (!levelSettings.fescape)
+                                    break
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                    opts = array_duplicate(spriteList)
+                                    var cb = "cardSprite"
+                                    var prompt = "sprite"
+                                    txt = "levelSettings.titlecardSprite"
+                                    if (settingsHovering == 4)
+                                    {
+                                        opts = []
+                                        array_push(opts, "no titlecard")
+                                        opts = gml_Script_array_concat(opts, spriteList)
+                                    }
+                                    if (settingsHovering == 5)
+                                    {
+                                        cb = "Sprite"
+                                        txt = "levelSettings.titleSprite"
+                                    }
+                                    if (settingsHovering == 6)
+                                    {
+                                        opts = audioList
+                                        prompt = "audio"
+                                        cb = "Song"
+                                        txt = "levelSettings.titleSong"
+                                    }
+                                    else if (settingsHovering == 7)
+                                    {
+                                        opts = audioList
+                                        prompt = "audio"
+                                        cb = "SongN"
+                                        txt = "levelSettings.titleSongN"
+                                    }
+                                    if (w_findCanvasIndex("bigDropdown") != -1)
+                                    {
+                                        w_openCanvas[w_findCanvasIndex("bigDropdown")].quickerase = 1
+                                        wCanvas_close("bigDropdown")
+                                    }
+                                    nd = wCanvas_open_dropdown("bigDropdown", (cursorX / w_scale), (cursorY / w_scale), opts, _stGet(txt), ("title" + cb), ("Input " + prompt + " name"))
+                                    break
+                                case 9:
+                                    editor_state = st_popup
+                                    currnoisehead = random_range(0, (sprite_get_number(spr_titlecard_noise) - 1))
+                                    windowQuickErase = 1
+                                    windowQuickDraw = 1
+                                    editorWindowUpdate()
+                                    wCanvas_open("noiseheads", noiseX, noiseY)
+                                    break
+                            }
+
+                        }
+                    }
+                    break
+                case "editorSettings":
                     mInd = floor(onY / 16)
                     if (mInd == clamp(mInd, 0, 3))
                         settingsHovering = mInd
@@ -1035,261 +1327,290 @@ for (i = 0; i < array_length(w_openCanvas); i++)
                         switch settingsHovering
                         {
                             case 0:
-                                txt = "data.properties.song"
-                                var opts = array_duplicate(audioList)
+                                break
+                            case 1:
+                                ini_open("EditorSettings.ini")
+                                txt = ini_read_string("Editor", "music", "")
+                                ini_close()
+                                opts = array_duplicate(audioList)
                                 opts = gml_Script_array_concat(opts, global.defaultSong_names)
-                                var def = _stGet(txt)
+                                def = txt
                                 if variable_struct_exists(global.defaultSong_display, def)
                                     def = struct_get(global.defaultSong_display, def)
-                                nd = wCanvas_open_dropdown("bgPresetDropdown", (cursorX / w_scale), (cursorY / w_scale), opts, def, "songSelected")
-                                break
-                            case 1:
-                                txt = "data.properties.songTransitionTime"
-                                _stSet(txt, gml_Script_ask_or_not("Transition time in milliseconds (has an effect ONLY on custom songs):", _stGet(txt)))
+                                if (w_findCanvasIndex("bgPresetDropdown") != -1)
+                                {
+                                    w_openCanvas[w_findCanvasIndex("bgPresetDropdown")].quickerase = 1
+                                    wCanvas_close("bgPresetDropdown")
+                                }
+                                nd = wCanvas_open_dropdown("bgPresetDropdown", (cursorX / w_scale), (cursorY / w_scale), opts, def, "songSelectedEditor")
                                 break
                             case 2:
-                                txt = "data.properties.pausecombo"
-                                _stSet(txt, gml_Script_ask_or_not("Set time for combo to be paused in frames:", _stGet(txt)))
+                                ini_open("EditorSettings.ini")
+                                txt = ini_read_string("Editor", "showtrails", "True")
+                                if (txt == "True")
+                                    ini_write_string("Editor", "showtrails", "False")
+                                else if (txt == "False")
+                                    ini_write_string("Editor", "showtrails", "True")
+                                ini_close()
                                 break
                             case 3:
-                                editor_state = st_resize
-                                editorWindowUpdate()
+                                ini_open("EditorSettings.ini")
+                                txt = ini_read_string("Editor", "windowstyle", "Fancy")
+                                if (txt == "Fancy")
+                                    ini_write_string("Editor", "windowstyle", "Fast")
+                                else if (txt == "Fast")
+                                    ini_write_string("Editor", "windowstyle", "Fancy")
+                                ini_close()
                                 break
+                            default:
+
                         }
 
                     }
-                }
-                else
-                {
-                    mInd = floor(onY / 16)
-                    if (mInd == clamp(mInd, 0, 7))
-                        settingsHovering = mInd
-                    opts = []
-                    if mouse_check_button_pressed(mb_left)
-                    {
-                        switch settingsHovering
-                        {
-                            case 0:
-                                txt = "levelSettings.name"
-                                _stSet(txt, gml_Script_ask_or_not("Level name:", _stGet(txt)))
-                                break
-                            case 1:
-                                txt = "levelSettings.pscore"
-                                _stSet(txt, gml_Script_ask_or_not("Score for an S rank:", _stGet(txt)))
-                                break
-                            case 2:
-                                txt = "levelSettings.isWorld"
-                                _stSet(txt, (!_stGet(txt)))
-                                break
-                            case 3:
-                                txt = "levelSettings.escape"
-                                _stSet(txt, timeString_get_seconds(gml_Script_ask_or_not("Pizza Time limit:", timeString_get_string(_stGet(txt)))))
-                                break
-                            case 4:
-                            case 5:
-                            case 6:
-                                opts = array_duplicate(spriteList)
-                                var cb = "cardSprite"
-                                var prompt = "sprite"
-                                txt = "levelSettings.titlecardSprite"
-                                if (settingsHovering == 4)
-                                {
-                                    opts = []
-                                    array_push(opts, "no titlecard")
-                                    opts = gml_Script_array_concat(opts, spriteList)
-                                }
-                                if (settingsHovering == 5)
-                                {
-                                    cb = "Sprite"
-                                    txt = "levelSettings.titleSprite"
-                                }
-                                else if (settingsHovering == 6)
-                                {
-                                    opts = audioList
-                                    prompt = "audio"
-                                    cb = "Song"
-                                    txt = "levelSettings.titleSong"
-                                }
-                                nd = wCanvas_open_dropdown("bigDropdown", (cursorX / w_scale), (cursorY / w_scale), opts, _stGet(txt), ("title" + cb), ("Input " + prompt + " name"))
-                                break
-                        }
-
-                    }
-                }
-                break
-            case "instanceMenu":
-                ins = c.instance
-                if (!instance_exists(ins))
-                {
-                    wCanvas_close(c)
                     break
-                }
-                else
-                {
-                    var insData = _stGet("data.instances[" + string(ins.instID) + "]")
-                    var varInfo = instance_getVarList(insData.object, insData, 1)
-                    var varList = varInfo[0]
-                    variable_struct_set(c, "scrollBorders", [0, ((array_length(varList) + 2) * 16 + 16 - c.height)])
-                    struct_set(c, [["hovering", floor((onY - 18) / 16)]]) // NEW: Spacing
-                    if (c.hovering != clamp(c.hovering, 0, (array_length(varList) - 1)))
-                        c.hovering = -1
-                    if ((onY - c.scroll_y) <= 16 || onY >= (c.scroll_y + (c.height - 14))) {
-                        c.hovering = -1
-                    }
-                    if mouse_check_button_pressed(mb_left)
+                case "instanceMenu":
+                    ins = c.instance
+                    if (!instance_exists(ins))
                     {
-                        if (onX < 16 && (onY - c.scroll_y) < 16)
-                            wCanvas_close(c)
-                        else if (onX < 48 && onY > (c.scroll_y + (c.height - 16)))
+                        inVarMenu = 0
+                        inMenu = 0
+                        c.quickerase = 1
+                        wCanvas_close(c)
+                        break
+                    }
+                    else
+                    {
+                        if (!preset)
                         {
-                            var varName = get_string("variable name:", "")
-                            if (varName != "")
+                            var insData = _stGet("data.instances[" + string(ins.instID) + "]")
+                            var varInfo = instance_getVarList(insData.object, insData, 1)
+                        }
+                        if preset
+                        {
+                            insData = variable_instance_get(1227, "values")
+                            varInfo = instance_getVarList(objSelected, insData, 1)
+                        }
+                        if keyboard_check(vk_rcontrol)
+                            show_message(varInfo)
+                        var varList = varInfo[0]
+                        variable_struct_set(c, "scrollBorders", [0, ((array_length(varList) + 2) * 16 + 16 - c.height)])
+                        struct_set(c, [["hovering", floor((onY - 18) / 16)]])
+                        if (c.hovering != clamp(c.hovering, 0, (array_length(varList) - 1)))
+                            c.hovering = -1
+                        if ((onY - c.scroll_y) <= 16 || onY >= (c.scroll_y + (c.height - 14))) {
+                        c.hovering = -1
+                        }
+                        if mouse_check_button_pressed(mb_left)
+                        {
+                            if (onX < 16 && (onY - c.scroll_y) < 16)
                             {
-                                var varValue = get_string((varName + " value:"), "")
-                                if (varValue != "")
+                                inVarMenu = 0
+                                inMenu = 0
+                                wCanvas_close(c)
+                            }
+                            else if (onX < 48 && onY > (c.scroll_y + (c.height - 16)))
+                            {
+                                variableParamSelected = 0
+                                keyboard_string = ""
+                                inVarMenu = 1
+                                if (w_findCanvasIndex("createVariable") != -1)
                                 {
-                                    if string_count("spr", varName)
+                                    w_openCanvas[w_findCanvasIndex("createVariable")].quickerase = 1
+                                    wCanvas_close("createVariable")
+                                }
+                                if (w_findCanvasIndex("editVariable") != -1)
+                                {
+                                    w_openCanvas[w_findCanvasIndex("editVariable")].quickerase = 1
+                                    wCanvas_close("editVariable")
+                                }
+                                var test = wCanvas_open_dropdown("createVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableCreate")
+                                if (!preset)
+                                    struct_set(test, [["instance", ins], ["instID", ins.instID]])
+                                else
+                                    struct_set(test, [["instance", ins], ["instID", obj_varstorage.values]])
+                            }
+                            else if (c.hovering != -1 && onX < (c.width - 8))
+                            {
+                                if (onX > (c.width - 20))
+                                    variable_struct_remove(insData.variables, varList[c.hovering])
+                                else
+                                {
+                                    var varName = varList[c.hovering]
+                                    if is_array(varInfo[1][c.hovering])
                                     {
-                                        if _spr_exists(varValue)
+                                        var info = varInfo[1][c.hovering]
+                                        var opList = []
+                                        if is_string(info[1])
                                         {
-                                            noDot = string_replace(varValue, ".", "")
-                                            if (string_digits(noDot) == noDot)
-                                                varValue = real(varValue)
-                                            _stSet(("data.instances[" + string(ins.instID) + "].variables." + varName), varValue)
+                                            if variable_instance_exists(id, info[1])
+                                                opList = variable_instance_get(id, info[1])
+                                        }
+                                        if is_array(info[1])
+                                            opList = info[1]
+                                        var cust = 1
+                                        if (array_length(info) > 2)
+                                        {
+                                            if variable_struct_exists(info[2], "noCustom")
+                                            {
+                                                var cock = info[2]
+                                                cust = (!cock.noCustom)
+                                            }
+                                        }
+                                        if (!preset)
+                                        {
+                                            if (w_findCanvasIndex("valueDropdown") != -1)
+                                            {
+                                                w_openCanvas[w_findCanvasIndex("valueDropdown")].quickerase = 1
+                                                wCanvas_close("valueDropdown")
+                                            }
+                                            var d = wCanvas_open_dropdown("valueDropdown", clamp((cursorX / w_scale), 0, (obj_screensizer.actual_width - c.width)), clamp((cursorY / w_scale), 0, (obj_screensizer.actual_height - c.height)), opList, _stGet("data.instances[" + string(ins.instID) + "].variables." + varName), "varValueSelected", "input custom value:")
+                                            struct_set(d, [["instance", ins], ["instID", ins.instID], ["varName", varName], ["dropdownCustom", cust]])
                                         }
                                         else
-                                            show_message("That sprite does not exist")
+                                        {
+                                            if (w_findCanvasIndex("valueDropdown") != -1)
+                                            {
+                                                w_openCanvas[w_findCanvasIndex("valueDropdown")].quickerase = 1
+                                                wCanvas_close("valueDropdown")
+                                            }
+                                            d = wCanvas_open_dropdown("valueDropdown", clamp((cursorX / w_scale), 0, (obj_screensizer.actual_width - c.width)), clamp((cursorY / w_scale), 0, (obj_screensizer.actual_height - c.height)), opList, struct_get(insData.variables, varName), "varValueSelected", "input custom value:")
+                                            struct_set(d, [["instance", 1227], ["varName", varName], ["dropdownCustom", cust]])
+                                        }
                                     }
                                     else
                                     {
-                                        noDot = string_replace(varValue, ".", "")
-                                        if (string_digits(noDot) == noDot)
-                                            varValue = real(varValue)
-                                        _stSet(("data.instances[" + string(ins.instID) + "].variables." + varName), varValue)
-                                    }
-                                }
-                            }
-                        }
-                        else if (c.hovering != -1 && onX < (c.width - 8))
-                        {
-                            if (onX > (c.width - 20))
-                                variable_struct_remove(insData.variables, varList[c.hovering])
-                            else
-                            {
-                                varName = varList[c.hovering]
-                                if is_array(varInfo[1][c.hovering])
-                                {
-                                    var info = varInfo[1][c.hovering]
-                                    var opList = []
-                                    if is_string(info[1])
-                                    {
-                                        if variable_instance_exists(id, info[1])
-                                            opList = variable_instance_get(id, info[1])
-                                    }
-                                    if is_array(info[1])
-                                        opList = info[1]
-                                    var cust = 1
-                                    if (array_length(info) > 2)
-                                    {
-                                        if variable_struct_exists(info[2], "noCustom")
+                                        if (w_findCanvasIndex("editVariable") != -1)
                                         {
-                                            var cock = info[2]
-                                            cust = (!cock.noCustom)
+                                            w_openCanvas[w_findCanvasIndex("editVariable")].quickerase = 1
+                                            wCanvas_close("editVariable")
                                         }
-                                    }
-                                    var d = wCanvas_open_dropdown("valueDropdown", clamp((cursorX / w_scale), 0, (obj_screensizer.actual_width - c.width)), clamp((cursorY / w_scale), 0, (obj_screensizer.actual_height - c.height)), opList, _stGet("data.instances[" + string(ins.instID) + "].variables." + varName), "varValueSelected", "input custom value:")
-                                    struct_set(d, [["instance", ins], ["instID", ins.instID], ["varName", varName], ["dropdownCustom", cust]])
-                                }
-                                else
-                                {
-                                    varValue = get_string((varName + " value:"), "")
-                                    if (varValue != "")
-                                    {
-                                        if string_count("spr", varName)
+                                        if (w_findCanvasIndex("createVariable") != -1)
                                         {
-                                            if _spr_exists(varValue)
-                                            {
-                                                noDot = string_replace(varValue, ".", "")
-                                                if (string_digits(noDot) == noDot)
-                                                    varValue = real(varValue)
-                                                _stSet(("data.instances[" + string(ins.instID) + "].variables." + varName), varValue)
-                                            }
-                                            else
-                                                show_message("That sprite does not exist")
+                                            w_openCanvas[w_findCanvasIndex("createVariable")].quickerase = 1
+                                            wCanvas_close("createVariable")
                                         }
+                                        variableParamSelected = 1
+                                        if (!preset)
+                                            keyboard_string = string(_stGet("data.instances[" + string(ins.instID) + "].variables." + varName))
                                         else
-                                        {
-                                            noDot = string_replace(varValue, ".", "")
-                                            if (string_digits(noDot) == noDot)
-                                                varValue = real(varValue)
-                                            _stSet(("data.instances[" + string(ins.instID) + "].variables." + varName), varValue)
-                                        }
+                                            keyboard_string = string(variable_struct_get(obj_varstorage.values.variables, varName))
+                                        if (keyboard_string == "undefined")
+                                            keyboard_string = ""
+                                        inVarMenu = 1
+                                        test = wCanvas_open_dropdown("editVariable", 300, 150, ["mark1", "mark2", "mark3", "mark4", "mark5", "mark6", "mark7", "mark8", "mark9", "mark10", "mark11", "mark12", "mark13", "mark14", "mark15", "mark16", "mark17", "mark18", "mark19", "mark20", "mark21", "mark22", "mark23", "mark24", "mark25"], 0, "variableEdit")
+                                        if (!preset)
+                                            struct_set(test, [["instance", ins], ["instID", ins.instID], ["variableName", varName], ["variableValue", keyboard_string]])
+                                        else
+                                            struct_set(test, [["instance", ins], ["instID", obj_varstorage.values], ["variableName", varName], ["variableValue", keyboard_string]])
                                     }
                                 }
                             }
+                            instance_update_variables(ins, insData)
                         }
-                        instance_update_variables(ins, insData)
+                        break
+                    }
+                case "autotileInd":
+                    opts = []
+                    var ts = _tileset(tilesetSelected)
+                    for (j = 0; j < array_length(ts.autotile); j++)
+                        opts[j] = j
+                    if (array_length(opts) > 1)
+                        struct_set(c, [["optionList", opts]])
+                    else
+                        wCanvas_close(c)
+                    break
+                case "autotileEditor":
+                    var atd = tilesetStruct.autotile[tileset_autotileIndex]
+                    if mouse_check_button(mb_left)
+                    {
+                        var xInd = floor(onX / gridSize)
+                        var yInd = floor(onY / gridSize)
+                        if (xInd == clamp(xInd, 0, 10) && yInd == clamp(yInd, 0, 5))
+                        {
+                            for (var xx = 0; xx < tilesetCoord[2]; xx++)
+                            {
+                                for (var yy = 0; yy < tilesetCoord[3]; yy++)
+                                    atd[(xInd + xx)][(yInd + yy)] = [(tilesetCoord[0] + xx), (tilesetCoord[1] + yy)]
+                            }
+                            array_set(tilesetStruct.autotile, tileset_autotileIndex, atd)
+                        }
+                    }
+                    if mouse_check_button_released(mb_left)
+                    {
+                        var atFile = "sprites/" + tilesetSelected + "_" + string(tileset_autotileIndex) + ".autotile"
+                        if gml_Script_array_value_exists(global.defaultTilesets, tilesetSelected)
+                            autotile_save(atd, gml_Script_editor_folder_afom(atFile))
+                        else
+                            autotile_save(atd, gml_Script_mod_folder_afom(atFile))
                     }
                     break
-                }
-            case "autotileInd":
-                opts = []
-                var ts = _tileset(tilesetSelected)
-                for (j = 0; j < array_length(ts.autotile); j++)
-                    opts[j] = j
-                if (array_length(opts) > 1)
-                    struct_set(c, [["optionList", opts]])
-                else
-                    wCanvas_close(c)
-                break
-            case "autotileEditor":
-                var atd = tilesetStruct.autotile[tileset_autotileIndex]
-                if mouse_check_button(mb_left)
-                {
-                    var xInd = floor(onX / gridSize)
-                    var yInd = floor(onY / gridSize)
-                    if (xInd == clamp(xInd, 0, 10) && yInd == clamp(yInd, 0, 5))
+                case "autotileEditButton":
+                    if mouse_check_button_pressed(mb_left)
                     {
-                        for (var xx = 0; xx < tilesetCoord[2]; xx++)
+                        var ind = w_findCanvasIndex("tileset")
+                        if (ind != -1)
                         {
-                            for (var yy = 0; yy < tilesetCoord[3]; yy++)
-                                atd[(xInd + xx)][(yInd + yy)] = [(tilesetCoord[0] + xx), (tilesetCoord[1] + yy)]
+                            if (w_findCanvasIndex("autotileEditor") == -1)
+                            {
+                                t = w_openCanvas[ind]
+                                wCanvas_open("autotileEditor", (t.x + t.width), t.y)
+                            }
+                            else
+                                wCanvas_close("autotileEditor")
                         }
-                        array_set(tilesetStruct.autotile, tileset_autotileIndex, atd)
                     }
-                }
-                if mouse_check_button_released(mb_left)
-                {
-                    var atFile = "sprites/" + tilesetSelected + "_" + string(tileset_autotileIndex) + ".autotile"
-                    if gml_Script_array_value_exists(global.defaultTilesets, tilesetSelected)
-                        autotile_save(atd, editor_folder(atFile))
+                    break
+                case "noiseheads":
+                    if (nselect == undefined)
+                    {
+                        cursorImage = 0
+                        for (ind = 0; ind < array_length(levelSettings.noiseHeads); ind++)
+                        {
+                            xx = (struct_get(levelSettings.noiseHeads[ind], "x")) * cscale
+                            yy = (struct_get(levelSettings.noiseHeads[ind], "y")) * cscale
+                            var scale = (struct_get(levelSettings.noiseHeads[ind], "scale")) * cscale
+                            var offset = 100 * scale
+                            if point_in_rectangle(onX, onY, (xx - offset), (yy - offset), (xx + offset), (yy + offset))
+                            {
+                                cursorImage = 5
+                                if mouse_check_button_pressed(mb_left)
+                                    nselect = ind
+                                if mouse_check_button(mb_right)
+                                {
+                                    array_delete(levelSettings.noiseHeads, ind, 1)
+                                    ind -= 1
+                                }
+                            }
+                        }
+                        if mouse_check_button(mb_right)
+                            cursorImage = 6
+                        if (mouse_check_button_pressed(mb_left) && nselect == undefined)
+                        {
+                            var nstruct = struct_new([["x", (onX / cscale)], ["y", (onY / cscale)], ["scale", 1]])
+                            array_push(levelSettings.noiseHeads, nstruct)
+                            nselect = array_length(levelSettings.noiseHeads) - 1
+                        }
+                    }
                     else
-                        autotile_save(atd, mod_folder(atFile))
-                }
-                break
-            case "autotileEditButton":
-                if mouse_check_button_pressed(mb_left)
-                {
-                    var ind = w_findCanvasIndex("tileset")
-                    if (ind != -1)
                     {
-                        if (w_findCanvasIndex("autotileEditor") == -1)
-                        {
-                            t = w_openCanvas[ind]
-                            wCanvas_open("autotileEditor", (t.x + t.width), t.y)
-                        }
-                        else
-                            wCanvas_close("autotileEditor")
+                        cursorImage = 5
+                        variable_struct_set(levelSettings.noiseHeads[nselect], "x", (onX / cscale))
+                        variable_struct_set(levelSettings.noiseHeads[nselect], "y", (onY / cscale))
+                        var scaling = mouse_wheel_up() - mouse_wheel_down()
+                        scale = struct_get(levelSettings.noiseHeads[nselect], "scale")
+                        variable_struct_set(levelSettings.noiseHeads[nselect], "scale", (scale + 0.05 * scaling))
+                        if mouse_check_button_pressed(mb_left)
+                            nselect = undefined
                     }
-                }
-                break
-        }
+                    break
+            }
 
+        }
     }
 }
 instance_deactivate_object(obj_editorInst)
 var v = view_camera[0]
-instance_activate_region(camera_get_view_x(v), camera_get_view_y(v), camera_get_view_width(v), camera_get_view_height(v), 1)
+instance_activate_region(camera_get_view_x(v), camera_get_view_y(v), camera_get_view_width(v), camera_get_view_height(v), true)
 for (i = 0; i < array_length(unwanted); i++)
     instance_deactivate_object(unwanted[i])
 with (obj_editorInst)
@@ -1311,25 +1632,32 @@ with (obj_tilemapDrawer)
 }
 var edChange = keyboard_check_pressed(vk_tab)
 editor_state += edChange
-if (editor_state > st_resize)
+if (editor_state > st_popup)
     editor_state = -1
 if (edChange != 0)
-    editorWindowUpdate()
-switch editor_state
 {
-    case st_instances:
-        layer_instances += (keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left))
-        break
-    case st_tiles:
-        layer_tilemap -= (keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left))
-        break
-    case st_backgrounds:
-        layer_background -= (keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left))
-        break
+    windowQuickErase = 1
+    windowQuickDraw = 1
+    editorWindowUpdate()
 }
+if (!inVarMenu)
+{
+    switch editor_state
+    {
+        case st_instances:
+            layer_instances += (keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left))
+            break
+        case st_tiles:
+            layer_tilemap -= (keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left))
+            break
+        case st_backgrounds:
+            layer_background -= (keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left))
+            break
+    }
 
+}
 layer_instances = clamp(layer_instances, 0, 100)
-layer_tilemap = clamp(layer_tilemap, -8, 10)
+layer_tilemap = clamp(layer_tilemap, -8, 15)
 var lvlW = struct_get(struct_get(data, "properties"), "levelWidth")
 var lvlH = struct_get(struct_get(data, "properties"), "levelHeight")
 var camW = camera_get_view_width(view_camera[0])
@@ -1345,12 +1673,10 @@ if keyboard_check_pressed(vk_return)
 {
     rp = roomPath()
     saveData()
-    saveData2()
 }
 if keyboard_check_pressed(vk_escape)
 {
     saveData()
-    saveData2()
     room_goto(rmModMenu)
 }
 if updateUndoMemory
@@ -1381,11 +1707,6 @@ if keyboard_check(vk_control)
     }
 }
 variable_struct_set(global.editorMemory, lvlRoom, new_memoryVarStruct())
-
-
-
-
-
 
 
 // NEW

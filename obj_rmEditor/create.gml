@@ -1,24 +1,169 @@
-// NEW stuff is in load and save data
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_modRoom_init
 
+System.Exception: Unable to find the var name for anonymous code object gml_Script_modRoom_init
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_instanceManager_reset
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_instanceManager_reset
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_mod_folder_afom
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_mod_folder_afom
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_find_files_recursive
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_find_files_recursive
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_mod_folder_afom
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_mod_folder_afom
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_array_value_exists
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_array_value_exists
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_layerConfirm
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_layerConfirm
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_layerFormat
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_layerFormat
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_layerFormat
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_layerFormat
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_layerConfirm
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_layerConfirm
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_layerFormat
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_layerFormat
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_data_compatibility
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_data_compatibility
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_mod_folder_afom
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_mod_folder_afom
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_mod_folder_afom
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_mod_folder_afom
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_find_files_recursive
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_find_files_recursive
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_SplitString
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_SplitString
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_json_save
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_json_save
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_json_save
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_json_save
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_mod_folder_afom
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_mod_folder_afom
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_mod_folder_afom
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_mod_folder_afom
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_tileLayer_isSecret
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_tileLayer_isSecret
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_layerFormat
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_layerFormat
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_SplitString
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_SplitString
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_fix_spawner_variables
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_fix_spawner_variables
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
+/*
+WARNING: Recursive script decompilation (for member variable name resolution) failed for gml_Script_general_folder_afom
+
+System.Exception: Unable to find the var name for anonymous code object gml_Script_general_folder_afom
+   at UndertaleModLib.Decompiler.Decompiler.<DecompileFromBlock>g__FindActualNameForAnonymousCodeObject|5_2(DecompileContext context, UndertaleCode anonymousCodeObject) in D:\a\UndertaleModToolCE\UndertaleModToolCE\UndertaleModLib\Decompiler\Decompiler.cs:line 648
+*/
 scr_playerreset()
 gml_Script_modRoom_init()
 global.editingLevel = 1
 gml_Script_instanceManager_reset()
 stopSong()
 global.panic = 0
-global.gameframe_caption_text = "Create Your Own Pizza Tower"
 window_set_cursor(cr_default)
 draw_set_font(global.editorfont)
 var comment = ""
 level = global.editorLevelName
 lvlRoom = global.editorRoomName
-editorVersion = 5
 data = roomData_new()
-data2 = roomData_new()
 port_mode = 0
 levelSettings = level_load(level)
 levelNameList = []
-var dir = mod_folder("levels/")
+var dir = gml_Script_mod_folder_afom("levels/")
 levelFiles = gml_Script_find_files_recursive(dir, ".ini")
 for (var i = 0; i < array_length(levelFiles); i++)
     array_push(levelNameList, string_replace(string_replace(filename_path(levelFiles[i]), dir, ""), "/", ""))
@@ -36,51 +181,55 @@ camZoom = 1
 layer_instances = 0
 layer_tilemap = 5
 layer_background = 5
+roomNameList = []
+checkSelector = 0
 initialX = 0
 initialY = 0
-selectionList = ds_list_create()
-copiedList = ds_list_create()
-instanceIDList = ds_list_create()
-copiedIDList = ds_list_create()
-listIDList = ds_list_create()
-inst = obj_bossdoor
-addToList = 0
-checkSelector = 0
 levelList = global.levelNameList
-roomNameList = []
-randomize()
-for (var rm = file_find_first((mod_folder("levels/") + level + "/rooms/*.json"), 0); rm != ""; rm = file_find_next())
+inst = obj_noisecredit
+keepgo = 0
+savedObjSpr = -4
+skipindex = -4
+preset = 0
+inMenu = 0
+variableString = ""
+variableValue = ""
+variableParamSelected = 0
+inVarMenu = 0
+trailsprs = 0
+placingInst = 0
+deletingTile = 0
+deletingRooms = 0
+roomNameAdd = ""
+bgStructDraw = 0
+for (var rm = file_find_first((gml_Script_mod_folder_afom("levels/") + level + "/rooms/*.json"), 0); rm != ""; rm = file_find_next())
 {
     if (string_count("_wfixed", string(rm)) == 0)
         array_push(roomNameList, filename_name(filename_change_ext(rm, "")))
 }
-function array_clone(argument0) //gml_Script_array_clone
-{
-    var array = argument0
-    var first = array
-    array = first
-    return array;
-}
-
 function roomPath() //gml_Script_roomPath
 {
-    return fstring(mod_folder("levels/{level}/rooms/{lvlRoom}.json"));
+    var fName = fstring(gml_Script_mod_folder_afom("levels/{level}/rooms/{lvlRoom}_wfixed.json"))
+    if (!file_exists(fName))
+        fName = fstring(gml_Script_mod_folder_afom("levels/{level}/rooms/{lvlRoom}.json"))
+    return fName;
 }
 
-function roomPath2() //gml_Script_roomPath2
+function objDataPath() //gml_Script_objDataPath
 {
-    return fstring(mod_folder("levels/{level}/rooms/{lvlRoom}_wfixed.json"));
+    var pName = "editor_assets/objects.json"
+    return pName;
 }
 
 function saveData() //gml_Script_saveData
 {
-    data.editorVersion = editorVersion
-
+    data.editorVersion = global.editorVersion
+    
     // NEW: save ids as string
     for (var i = 0; i < array_length(data.instances); i++)
     {
         inst = data.instances[i]
-        var objectId = inst.object
+        objectId = inst.object
         if (typeof(objectId) != "string") {
             objectId = object_get_name(objectId)
             inst.object = objectId
@@ -93,7 +242,7 @@ function saveData() //gml_Script_saveData
     // NEW: reset object id as number
     for (var i = 0; i < array_length(data.instances); i++) {
         inst = data.instances[i]
-        var objectId = inst.object
+        objectId = inst.object
         if (typeof(objectId) == "string")
         {
             objectId = asset_get_index(objectId)
@@ -104,237 +253,17 @@ function saveData() //gml_Script_saveData
 
     var b = 1
     var p = "levels/{level}/rooms/"
-    var backup = mod_folder(fstring(p + "backups/{lvlRoom}_wfixed.backup"))
-    var oldBackupDir = mod_folder(fstring(p + "backups"))
+    var backup = gml_Script_mod_folder_afom(fstring(p + "backups/{lvlRoom}.backup"))
+    var oldBackupDir = gml_Script_mod_folder_afom(fstring(p + "backups"))
     var rBackup = "backups/" + backup
+
+
+
 
     if directory_exists(oldBackupDir)
     {
         var oldB = gml_Script_find_files_recursive((oldBackupDir + "/"), "")
         for (var i = 0; i < array_length(oldB); i++)
-        {
-            var bNum = gml_Script_SplitString(oldB[i], ".backup")
-            file_copy(oldB[i], ("backups/" + oldB[i]))
-            file_delete(oldB[i])
-        }
-    }
-    directory_destroy(oldBackupDir)
-    for (b = 0; b <= 4; b++)
-    {
-        if file_exists(rBackup + string(b))
-        {
-            if (b == 0)
-                file_delete(rBackup + "0")
-            else
-                file_rename((rBackup + string(b)), (rBackup + (string(b - 1))))
-        }
-    }
-    gml_Script_json_save(jText, roomPath2())
-    gml_Script_json_save(jText, (rBackup + "4"))
-    level_save(level, levelSettings)
-    obj_modAssets.saveNotice = 120
-}
-
-function saveData2() //gml_Script_saveData2
-{
-    data2.editorVersion = editorVersion
-    data2.instances = [-4]
-    var spawnind = 1
-    for (var i = 0; i < array_length(data.instances); i++)
-    {
-        var data3 = [struct_new([["layer", 0], ["deleted", 0], ["variables", struct_new([["x", 0], ["flipX", 0], ["y", 0], ["flipY", 0]])], ["object", 0]])]
-        if (!is_struct(data3[0]))
-            data3[0] = array_get(data.instances, i)
-        else
-        {
-            var st_names = variable_struct_get_names(data3[0])
-            var pass = 1
-
-            // NEW: object id to number if its string
-            var objectId = array_get(data.instances, i).object
-            if (typeof(objectId) == "string")
-            {
-                objectId = asset_get_index(objectId)
-            }
-            // NEW: end of NEW
-    
-            var st_valuetopass = objectId
-
-            if (!is_real(st_valuetopass))
-                array_delete(data.instances, i, 1)
-            if (st_valuetopass == 1172 || st_valuetopass == 383 || st_valuetopass == 1174 || st_valuetopass == 1175 || st_valuetopass == 1122 || st_valuetopass == 1192 || st_valuetopass == 1171 || st_valuetopass == 936 || st_valuetopass == 1151 || st_valuetopass == 1152 || st_valuetopass == 576 || st_valuetopass == 577 || st_valuetopass == 578 || st_valuetopass == 1191 || st_valuetopass == 899 || st_valuetopass == 762 || st_valuetopass == 1025 || st_valuetopass == 1024 || st_valuetopass == 1153 || st_valuetopass == 1155 || st_valuetopass == 1015 || st_valuetopass == 1078 || st_valuetopass == 710 || st_valuetopass == 237 || st_valuetopass == 153 || st_valuetopass == 496 || st_valuetopass == 1180 || st_valuetopass == 1096 || st_valuetopass == 1023 || st_valuetopass == 1183 || st_valuetopass == 708 || st_valuetopass == 675 || st_valuetopass == 1188 || st_valuetopass == 1189 || st_valuetopass == 553 || st_valuetopass == 74 || st_valuetopass == 948 || st_valuetopass == 1194)
-                pass = 0
-            else
-            {
-                for (var j = 0; j < array_length(st_names); j++)
-                {
-                    var st_value = struct_get(data.instances[i], st_names[j])
-                    variable_struct_set(data3[0], st_names[j], st_value)
-                }
-                if (st_valuetopass == 864)
-                    variable_struct_set(data3[0], "object", 811)
-                else if (st_valuetopass == 1181)
-                {
-                    variable_struct_set(data3[0], "object", 780)
-                    var object_vars = struct_get(data3[0], "variables")
-                    if (!(variable_struct_exists(object_vars, "sprite_index")))
-                        variable_struct_set(object_vars, "sprite_index", 2144)
-                    if (!(variable_struct_exists(object_vars, "image_speed")))
-                        variable_struct_set(object_vars, "image_speed", 0.35)
-                }
-                else if (st_valuetopass == 1182)
-                {
-                    variable_struct_set(data3[0], "object", 1144)
-                    object_vars = struct_get(data3[0], "variables")
-                    if (!(variable_struct_exists(object_vars, "sprite_index")))
-                        variable_struct_set(object_vars, "sprite_index", 2126)
-                }
-                else if (st_valuetopass == 598)
-                {
-                    object_vars = struct_get(data3[0], "variables")
-                    if variable_struct_exists(object_vars, "superjumpable")
-                    {
-                        var var_vars = struct_get(object_vars, "superjumpable")
-                        if (var_vars == 1 || var_vars == "true")
-                        {
-                            variable_struct_set(data3[0], "object", 730)
-                            if (!(variable_struct_exists(object_vars, "sprite_index")))
-                                variable_struct_set(object_vars, "sprite_index", 1217)
-                        }
-                    }
-                }
-                else if (st_valuetopass == 1176)
-                {
-                    variable_struct_set(data3[0], "object", 516)
-                    data3[1] = struct_new([["layer", 0], ["deleted", 0], ["variables", struct_new([["x", 0], ["flipX", 0], ["y", 0], ["flipY", 0]])], ["object", 0]])
-                    variable_struct_set(data3[1], "object", 672)
-                    variable_struct_set(data3[1], "deleted", struct_get(data3[0], "deleted"))
-                    object_vars = struct_get(data3[0], "variables")
-                    var object_vars2 = struct_get(data3[1], "variables")
-                    variable_struct_set(object_vars2, "x", struct_get(object_vars, "x"))
-                    variable_struct_set(object_vars2, "flipX", (!(struct_get(object_vars, "flipX"))))
-                    variable_struct_set(object_vars2, "y", struct_get(object_vars, "y"))
-                    variable_struct_set(object_vars2, "flipY", struct_get(object_vars, "flipY"))
-                }
-                else if (st_valuetopass == 677)
-                    variable_struct_set(data3[0], "object", 678)
-                else if (st_valuetopass == 135)
-                {
-                    object_vars = struct_get(data3[0], "variables")
-                    variable_struct_set(object_vars, "railmovespeed", 0)
-                    variable_struct_set(object_vars, "turnstart", 0)
-                    variable_struct_set(object_vars, "turner", 0)
-                    variable_struct_set(object_vars, "turnmax", 200)
-                    variable_struct_set(object_vars, "turntimer", 0)
-                }
-                else if (st_valuetopass == 1186)
-                {
-                    variable_struct_set(data3[0], "object", 646)
-                    object_vars = struct_get(data3[0], "variables")
-                    if (!(variable_struct_exists(object_vars, "grabbedspr")))
-                        variable_struct_set(object_vars, "grabbedspr", 327)
-                    if (!(variable_struct_exists(object_vars, "stunfallspr")))
-                        variable_struct_set(object_vars, "stunfallspr", 327)
-                    if (!(variable_struct_exists(object_vars, "walkspr")))
-                        variable_struct_set(object_vars, "walkspr", 329)
-                    if (!(variable_struct_exists(object_vars, "scaredspr")))
-                        variable_struct_set(object_vars, "scaredspr", 334)
-                    if (!(variable_struct_exists(object_vars, "spr_dead")))
-                        variable_struct_set(object_vars, "spr_dead", 323)
-                    if (!(variable_struct_exists(object_vars, "sprite_index")))
-                        variable_struct_set(object_vars, "sprite_index", 329)
-                }
-                else if (st_valuetopass == 1187)
-                    variable_struct_set(data3[0], "object", 720)
-                else if (st_valuetopass == 596)
-                {
-                    variable_struct_set(data3[0], "object", 763)
-                    object_vars = struct_get(data3[0], "variables")
-                    variable_struct_set(object_vars, "value", 50)
-                }
-                else if ((st_valuetopass == 767 || st_valuetopass == 776 || st_valuetopass == 775) && spawnind)
-                {
-                    data3[1] = struct_new([["layer", 0], ["deleted", 0], ["variables", struct_new([["x", 0], ["flipX", 0], ["y", 0], ["flipY", 0]])], ["object", 0]])
-                    variable_struct_set(data3[1], "object", 546)
-                    spawnind = 0
-                }
-                else if (st_valuetopass == 460)
-                    variable_struct_set(data3[0], "object", 748)
-                else if (st_valuetopass == 708)
-                    variable_struct_set(data3[0], "object", 112)
-                else if (st_valuetopass == 1190)
-                    variable_struct_set(data3[0], "object", 933)
-                else if (st_valuetopass == 1170)
-                    variable_struct_set(data3[0], "object", 494)
-                else if (st_valuetopass == 725)
-                    variable_struct_set(data3[0], "object", 192)
-                else if (st_valuetopass == 744)
-                    variable_struct_set(data3[0], "object", 250)
-                else if (st_valuetopass == 737)
-                    variable_struct_set(data3[0], "object", 250)
-                else if (st_valuetopass == 409)
-                    variable_struct_set(data3[0], "object", 598)
-                else if (st_valuetopass == 768)
-                    variable_struct_set(data3[0], "object", 769)
-                else if (st_valuetopass == 796)
-                    variable_struct_set(data3[0], "object", 764)
-                else if (st_valuetopass == 292)
-                {
-                    object_vars = struct_get(data3[0], "variables")
-                    variable_struct_set(object_vars, "showLadder", 1)
-                }
-                else if (st_valuetopass == 833)
-                {
-                    object_vars = struct_get(data3[0], "variables")
-                    variable_struct_set(object_vars, "showLadder", 1)
-                }
-                data2.instances = gml_Script_array_concat(data2.instances, data3)
-            }
-        }
-    }
-    array_delete(data2.instances, 0, 1)
-    var st_tile_data = struct_get(data, "tile_data")
-    variable_struct_set(data2, "tile_data", st_tile_data)
-    var st_backgroundsinst = struct_get(data, "backgrounds")
-    variable_struct_set(data2, "backgrounds", st_backgroundsinst)
-    var st_properties = struct_get(data, "properties")
-    variable_struct_set(data2, "properties", st_properties)
-
-    // NEW: save ids as string
-    for (var i = 0; i < array_length(data2.instances); i++)
-    {
-        inst = data2.instances[i]
-        var objectId = inst.object
-        if (typeof(objectId) != "string") {
-            objectId = object_get_name(objectId)
-            inst.object = objectId
-        }
-    }
-    // NEW: end of NEW
-
-    var jText = json_stringify(data2, 1)
-    
-    // NEW: reset object id as number
-    for (var i = 0; i < array_length(data2.instances); i++) {
-        inst = data2.instances[i]
-        var objectId = inst.object
-        if (typeof(objectId) == "string")
-        {
-            objectId = asset_get_index(objectId)
-            inst.object = objectId
-        }
-    }
-    // NEW: end of NEW
-
-    var b = 1
-    var p = "levels/{level}/rooms/"
-    var backup = mod_folder(fstring(p + "backups/{lvlRoom}.backup"))
-    var oldBackupDir = mod_folder(fstring(p + "backups"))
-    var rBackup = "backups/" + backup
-    if directory_exists(oldBackupDir)
-    {
-        var oldB = gml_Script_find_files_recursive((oldBackupDir + "/"), "")
-        for (i = 0; i < array_length(oldB); i++)
         {
             var bNum = gml_Script_SplitString(oldB[i], ".backup")
             file_copy(oldB[i], ("backups/" + oldB[i]))
@@ -360,29 +289,27 @@ function saveData2() //gml_Script_saveData2
 
 function loadData() //gml_Script_loadData
 {
-    if file_exists(roomPath2())
+    if file_exists(roomPath())
     {
-        var jText = file_text_read_all(roomPath2())
+        var jText = file_text_read_all(roomPath())
         if (jText == "")
         {
-            show_message(string(roomPath2()) + " has unfortunately corrupted. It has been deleted from your list of rooms in order to maintain stability")
-            file_delete(roomPath2())
+            show_message(string(roomPath()) + " has unfortunately corrupted. It has been deleted from your list of rooms in order to maintain stability")
+            file_delete(roomPath())
         }
         data = json_parse(jText)
         data = gml_Script_data_compatibility(data)
         for (var i = 0; i < array_length(data.instances); i++)
         {
-
             // NEW: load object id as number
             inst = data.instances[i]
-            var objectId = inst.object
+            objectId = inst.object
             if (typeof(objectId) == "string")
             {
                 objectId = asset_get_index(objectId)
                 inst.object = objectId
             }
             // NEW: end of NEW
-
 
             _temp = i
             if _stGet("data.instances[_temp].deleted")
@@ -430,20 +357,27 @@ function initInst(argument0) //gml_Script_initInst
     gml_Script_layerConfirm("Instances", l)
     var ins = instance_create_layer(struct_get(struct_get(insData, "variables"), "x"), struct_get(struct_get(insData, "variables"), "y"), layer_get_id(gml_Script_layerFormat("Instances", l)), obj_editorInst)
     
-
-    // NEW: object id to number if its string  
-    var objectId = insData.object
+    
+    // NEW: more name id...
+    objectId = insData.object
     if (typeof(objectId) == "string")
     {
         objectId = asset_get_index(objectId)
         insData.object = objectId
     }
     // NEW: end of NEW
-
-
-    ins.sprite_index = object_get_sprite(struct_get(insData, "object"))
+    
+    
+    var obj = struct_get(insData, "object")
+    
+    ins.sprite_index = object_get_sprite(obj)
     ins.instID = argument0
     instance_update_variables(ins, insData)
+    if placingInst
+    {
+        ins.placingInst = 1
+        placingInst = 0
+    }
     return ins;
 }
 
@@ -455,6 +389,7 @@ function addInst(argument0, argument1, argument2) //gml_Script_addInst
         instInd = ds_stack_pop(deletedIndexes)
     _temp = instInd
     data.instances[_temp] = newInst
+    placingInst = 1
     if (!port_mode)
         return initInst(instInd);
     return struct_new([["instID", instInd]]);
@@ -480,7 +415,7 @@ function initTileLayer(argument0, argument1) //gml_Script_initTileLayer
 }
 
 pleaseExist = ""
-function addTile(argument0, argument1, argument2, argument3, argument4) //gml_Script_addTile
+function addTile(argument0, argument1, argument2, argument3, argument4, argument5, argument6) //gml_Script_addTile
 {
     var name = argument0
     var coord = argument1
@@ -488,9 +423,15 @@ function addTile(argument0, argument1, argument2, argument3, argument4) //gml_Sc
     var yy = int64(argument3)
     if (argument4 == undefined)
         argument4 = 0
+    if (argument5 == undefined)
+        argument5 = 1
+    if (argument6 == undefined)
+        argument6 = 1
+    var flipX = argument5
+    var flipY = argument6
     tileLayerConfirm(layer_tilemap)
     var tLayer = string(layer_tilemap)
-    _stSet(("data.tile_data." + tLayer + "." + string(xx) + "_" + string(yy)), struct_new([["tileset", name], ["coord", coord], ["autotile", argument4], ["autotile_index", tileset_autotileIndex]]))
+    _stSet(("data.tile_data." + tLayer + "." + string(xx) + "_" + string(yy)), struct_new([["tileset", name], ["coord", coord], ["flipX", flipX], ["flipY", flipY], ["autotile", argument4], ["autotile_index", tileset_autotileIndex]]))
     if port_mode
         return;
     var itExists = 0
@@ -499,7 +440,7 @@ function addTile(argument0, argument1, argument2, argument3, argument4) //gml_Sc
     {
         if (layer_tilemap == other.layer_tilemap)
         {
-            drawTileToSurface(name, coord, xx, yy)
+            drawTileToSurface(name, coord, xx, yy, flipX, flipY)
             itExists = 1
         }
     }
@@ -509,6 +450,7 @@ function addTile(argument0, argument1, argument2, argument3, argument4) //gml_Sc
 
 function deleteTile(argument0, argument1) //gml_Script_deleteTile
 {
+    deletingTile = 1
     var xx = int64(argument0)
     var yy = int64(argument1)
     var camScale = camera_get_view_width(view_camera[0])
@@ -550,10 +492,11 @@ prevBGPreset = ""
 settingsMode = 0
 settingsHovering = -1
 toolbarHovering = -1
+debugHovering = -1
 instSelected = -4
 instOn = -4
 selCarry = []
-objIndex = 517
+objIndex = 574
 global.currentRoom = lvlRoom
 var exists = loadData()
 var prop = data.properties
@@ -562,27 +505,10 @@ if ((prop.levelWidth - prop.roomX) > 16384)
     prop.levelWidth = floor(512) * 32 + prop.roomX
     prop.levelHeight = floor(512) * 32 + prop.roomY
 }
-var createtest = 0
-var fName2 = mod_folder("levels/") + level + "/rooms/" + lvlRoom + "_wfixed.json"
-if (!file_exists(fName2))
-{
-    fName2 = mod_folder("levels/") + level + "/rooms/" + lvlRoom + ".json"
-    if (!file_exists(fName2))
-        createtest = 1
-}
-if (createtest == 0)
-{
-    var jText2 = file_text_read_all(fName2)
-    var pText2 = json_parse(jText2)
-    pText2 = gml_Script_data_compatibility(pText2)
-}
-else
-    pText2 = data
-initStage(pText2)
+initStage(data)
 if (!exists)
 {
     saveData()
-    saveData2()
     var rn = lvlRoom
     array_push(roomNameList, rn)
 }
@@ -610,12 +536,14 @@ for (i = 0; i < array_length(objFolderOrder); i++)
         }
     }
 }
-objSelected = 517
+objSelected = 574
 objFlipX = 0
 objFlipY = 0
+tileFlipX = 1
+tileFlipY = 1
 windows_init()
 w_scale = 2
-_stSet("w_canvas.toolbar", _wCanvas(400, 48, "toolbar"))
+_stSet("w_canvas.toolbar", _wCanvas(548, 48, "toolbar"))
 _stSet("w_canvas.objFolders", _wCanvas(86, 324, "objFolders"))
 _stSet("w_canvas.objFolders.gridSize", [86, 24])
 _stSet("w_canvas.objGrid", _wCanvas(256, 200, "objGrid"))
@@ -630,17 +558,29 @@ windows_add_canvas(100, 32, "tilesetMode")
 windows_add_canvas(32, 48, "autotileInd")
 windows_add_canvas(48, 16, "autotileEditButton")
 windows_add_canvas(320, 160, "autotileEditor")
-var r = _wCanvas(90, 256, "rooms")
+var r = _wCanvas(150, 256, "rooms")
 _stSet("w_canvas.rooms", r)
-_stSet("w_canvas.bgs", _wCanvas(256, 180, "bgs"))
+_stSet("w_canvas.bgs", _wCanvas(280, 210, "bgs"))
 windows_add_canvas(200, 200, "bgPresetDropdown")
 _stSet("w_canvas.settingTypes", _wCanvas(64, 32, "settingTypes"))
-_stSet("w_canvas.settings", _wCanvas(300, 128, "settings"))
+_stSet("w_canvas.settings", _wCanvas(300, 208, "settings"))
 _stSet("w_canvas.instanceMenu", _wCanvas(256, 128, "instanceMenu"))
+_stSet("w_canvas.debug", _wCanvas(300, 160, "debug"))
+_stSet("w_canvas.editorSettings", _wCanvas(250, 144, "editorSettings"))
 windows_add_canvas(100, 150, "valueDropdown")
 wCanvas_open("toolbar", 10, 10)
 wCanvas_open("layerDisplay", 10, 460)
+var noisewidth = 720
+var noiseheight = 405
+noiseX = (960 - noisewidth) / 2
+noiseY = (540 - noiseheight) / 2
+_stSet("w_canvas.noiseheads", _wCanvas(noisewidth, noiseheight, "noiseheads"))
+cscale = noisewidth / 960
+nselect = undefined
+currnoisehead = 0
 windows_add_canvas(200, 200, "bigDropdown")
+windows_add_canvas(400, 300, "createVariable")
+windows_add_canvas(400, 300, "editVariable")
 st_instances = 0
 st_tiles = 1
 st_backgrounds = 2
@@ -649,9 +589,23 @@ st_settings = 4
 st_save = 5
 st_play = 6
 st_edit = 7
-st_resize = 8
+st_debug = 8
+st_editorsettings = 9
+st_start = 10
+st_resize = 11
+st_popup = 12
+windowQuickDraw = 0
+windowQuickErase = 0
+fromStart = 0
 function editorWindowUpdate(argument0) //gml_Script_editorWindowUpdate
 {
+    if windowQuickErase
+    {
+        for (var i = 0; i < array_length(w_openCanvas); i++)
+            w_openCanvas[i].quickerase = 1
+        windowQuickErase = 0
+    }
+    inVarMenu = 0
     wCanvas_close("objFolders")
     wCanvas_close("objGrid")
     wCanvas_close("tilesetList")
@@ -660,6 +614,8 @@ function editorWindowUpdate(argument0) //gml_Script_editorWindowUpdate
     wCanvas_close("bgs")
     wCanvas_close("settingTypes")
     wCanvas_close("settings")
+    wCanvas_close("debug")
+    wCanvas_close("editorSettings")
     wCanvas_close("instanceMenu")
     wCanvas_close("tilesetMode")
     wCanvas_close("tilesetFolders")
@@ -667,7 +623,11 @@ function editorWindowUpdate(argument0) //gml_Script_editorWindowUpdate
     wCanvas_close("autotileEditor")
     wCanvas_close("autotileEditButton")
     wCanvas_close("bgPresetDropdown")
+    wCanvas_close("bgEscapeData")
     wCanvas_close("bigDropdown")
+    wCanvas_close("noiseheads")
+    wCanvas_close("createVariable")
+    wCanvas_close("editVariable")
     if (argument0 == 1)
     {
     }
@@ -698,7 +658,7 @@ function editorWindowUpdate(argument0) //gml_Script_editorWindowUpdate
             if tileset_doAutoTile
             {
                 var opts = []
-                for (var i = 0; i < array_length(ts.autotile); i++)
+                for (i = 0; i < array_length(ts.autotile); i++)
                     opts[i] = i
                 if (array_length(opts) > 1)
                 {
@@ -719,8 +679,22 @@ function editorWindowUpdate(argument0) //gml_Script_editorWindowUpdate
             wCanvas_open("settingTypes", 10, 68)
             wCanvas_open("settings", 74, 68)
             break
+        case st_debug:
+            wCanvas_open("debug", 10, 68)
+            break
+        case st_editorsettings:
+            wCanvas_open("editorSettings", 10, 68)
+            break
+        default:
+            windowQuickDraw = 1
     }
 
+    if windowQuickDraw
+    {
+        for (i = 0; i < array_length(w_openCanvas); i++)
+            w_openCanvas[i].quickdraw = 1
+        windowQuickDraw = 0
+    }
 }
 
 if (!(variable_struct_exists(global.editorMemory, lvlRoom)))
