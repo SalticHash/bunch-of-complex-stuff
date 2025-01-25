@@ -10,7 +10,7 @@ execute = function() {
     // Set global var to targer local var
     var obj = instance_nearest(x, y, target_obj)
     if (!is_real(obj)) return;
-    with
+
     set_global_to_local(obj, target_value, target_var);
 
     // Trigger target trigger
