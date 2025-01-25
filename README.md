@@ -3,13 +3,13 @@
 
 [![](https://images.gamebanana.com/static/img/favicon/16x16.png "Banana") Find on GameBanana](https://gamebanana.com/mods/494099)
 
+### The mod is now officially part of AFOM and I will keep working on it from there, improvements are on the way!
+ 
 ## The triggers
 ![Object variable sprite](assets/obj_variable.png "obj_variable")
 ![Object get variable sprite](assets/obj_getvar.png "obj_getvar")
 ![Object delay sprite](assets/obj_delay.png "obj_delay")
 ![Object compare sprite](assets/obj_compare.png "obj_compare")
-
-*Video explanation coming soon!*
 
 A mod for Pizza Tower's "Another Fixed Objects Mod", this mod offers triggers and
 more complex features for AFOM, the full list of additions is listed down below.
